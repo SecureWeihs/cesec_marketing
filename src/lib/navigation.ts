@@ -12,8 +12,8 @@ export const hauptnavigation = [
 	{ pfad: "/iso-27001", titel: "ISO 27001", verfuegbar: false },
 	{ pfad: "/security-services", titel: "Security Services", verfuegbar: false },
 	{ pfad: "/referenzen", titel: "Referenzen", verfuegbar: false },
-	{ pfad: "/about", titel: "About", verfuegbar: false },
-	{ pfad: "/kontakt", titel: "Kontakt", verfuegbar: false },
+	{ pfad: "/about", titel: "About", verfuegbar: true },
+	{ pfad: "/kontakt", titel: "Kontakt", verfuegbar: true },
 ] as const;
 
 export const rechtliches = [
@@ -21,3 +21,27 @@ export const rechtliches = [
 	{ pfad: "/datenschutz", titel: "Datenschutz", verfuegbar: true },
 	{ pfad: "/barrierefreiheit", titel: "Barrierefreiheit", verfuegbar: true },
 ] as const;
+
+/**
+ * Seiten außerhalb der Hauptnavigation. Dieselbe Regel: nicht verfügbare
+ * Seiten werden nirgends verlinkt.
+ */
+export const unterseiten = [
+	{ pfad: "/nis2-nisg-2026/betroffenheit-pruefen", titel: "Betroffenheit prüfen", verfuegbar: false },
+	{ pfad: "/nis2-nisg-2026/fristen-und-registrierung", titel: "Fristen und Registrierung nach NISG 2026", verfuegbar: false },
+	{ pfad: "/nis2-nisg-2026/haftung-der-geschaeftsfuehrung", titel: "Haftung der Geschäftsführung", verfuegbar: false },
+	{ pfad: "/nis2-nisg-2026/lieferkette-und-fragebogen", titel: "Lieferkette und Lieferantenfragebogen", verfuegbar: false },
+	{ pfad: "/iso-27001/ablauf-der-zertifizierung", titel: "Ablauf der ISO-27001-Zertifizierung", verfuegbar: false },
+	{ pfad: "/iso-27001/interne-audits", titel: "Interne Audits nach ISO 27001", verfuegbar: false },
+] as const;
+
+const alle: readonly { pfad: string; verfuegbar: boolean }[] = [
+	...hauptnavigation,
+	...rechtliches,
+	...unterseiten,
+];
+
+/** Gibt es die Seite schon? Unbekannte Pfade gelten als nicht vorhanden. */
+export function istVerfuegbar(pfad: string): boolean {
+	return alle.some((eintrag) => eintrag.pfad === pfad && eintrag.verfuegbar);
+}

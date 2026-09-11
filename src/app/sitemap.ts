@@ -8,6 +8,8 @@ import { site } from "@/lib/site";
  */
 const SEITEN = [
 	{ pfad: "/", prioritaet: 1 },
+	{ pfad: "/about", prioritaet: 0.8 },
+	{ pfad: "/kontakt", prioritaet: 0.7 },
 	{ pfad: "/impressum", prioritaet: 0.3 },
 	{ pfad: "/datenschutz", prioritaet: 0.3 },
 	{ pfad: "/barrierefreiheit", prioritaet: 0.3 },

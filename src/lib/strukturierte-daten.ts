@@ -71,3 +71,63 @@ export function brotkrumen(
 		})),
 	};
 }
+
+/**
+ * Die Person hinter dem Unternehmen, für /about.
+ *
+ * Jede Angabe stammt aus dem Beraterprofil des Inhabers. Zertifizierungen
+ * stehen als hasCredential, damit sie maschinenlesbar und überprüfbar sind —
+ * das ist bei einem Einzelunternehmen der Ersatz für Kundenlogos.
+ */
+export function person(): Knoten {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"@id": `${site.url}/about#person`,
+		name: "Sascha Weihs",
+		honorificPrefix: "Dipl.-Ing.",
+		jobTitle: "Informationssicherheitsbeauftragter",
+		url: `${site.url}/about`,
+		image: `${site.url}/bilder/portraet-about@2x.webp`,
+		email: site.email,
+		telephone: site.telefon.e164,
+		worksFor: { "@id": `${site.url}/#unternehmen` },
+		alumniOf: {
+			"@type": "CollegeOrUniversity",
+			name: "FH St. Pölten",
+		},
+		hasCredential: [
+			{
+				"@type": "EducationalOccupationalCredential",
+				name: "Information Security Auditor",
+				credentialCategory: "Personenzertifizierung nach EN ISO/IEC 17024",
+				recognizedBy: { "@type": "Organization", name: "CIS" },
+			},
+			{
+				"@type": "EducationalOccupationalCredential",
+				name: "Information Security Manager",
+				credentialCategory: "Personenzertifizierung nach EN ISO/IEC 17024",
+				recognizedBy: { "@type": "Organization", name: "CIS" },
+			},
+			{
+				"@type": "EducationalOccupationalCredential",
+				name: "Dipl.-Ing., Informatik & Security",
+				credentialCategory: "Akademischer Grad",
+				recognizedBy: { "@type": "CollegeOrUniversity", name: "FH St. Pölten" },
+			},
+		],
+		knowsAbout: [
+			"ISO/IEC 27001",
+			"ISO/IEC 27005",
+			"ISO 22301",
+			"NIS2",
+			"NISG 2026",
+			"DORA",
+			"IKT-Risikomanagement",
+			"Business Continuity Management",
+			"Interne Audits",
+		],
+		knowsLanguage: ["de", "en"],
+		sameAs: [impressum.profile.linkedin],
+	};
+}

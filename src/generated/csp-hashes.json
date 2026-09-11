@@ -1,34 +1,47 @@
 {
 	"/_global-error": [
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-321KbemLTRocXd+ykrJufhzwLbAVldqD/GfWN5lHtRc='"
+		"'sha256-jsZE/OQ3iLRRe4Y2aOJwO7bNTY432AYxmVSLeI+IYXM='"
 	],
 	"/_not-found": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-C89e03vhIZLD0ZqGPb56C9yRj/fPAwZCqgAyFkoj1zY='"
+		"'sha256-ijFbwj09CqDamjLAKgjtgdyo4RpO5eB22Hf3MlIhzb4='"
+	],
+	"/about": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-TLRsZ+G8ldxDOiwW1l7wGKtdpabLXijkAejzhpyaPIs='",
+		"'sha256-X624AxXOQ52Qd++IRLw1EQsrP5YaYj6L6bccahVYeq0='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-0ugMnhK/NUW6iArMBN7uCBIBKND+1ZLtNVHD8LSfwLs='"
 	],
 	"/barrierefreiheit": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-tcMxV0q8WFVz55rlYggLrXhT/uHMoN/pwPFJ+AYFkbo='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-GO+3P+6C7j+Ke7kp8PEuU3GZqxZ5YNtKY7atVRAe2fM='"
+		"'sha256-KKGPrZ10CS6I0zHobyjxRSXjqLDysBmtUdY/F427Tys='"
 	],
 	"/datenschutz": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-LcgdyZcrZGv35GPf9ZR82LpgfSvN5YUtAU2egMXCEWs='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-RevGV+5rTkIvhOwGt78++zTcxNIHCDe0KWz7GBY6HBA='"
+		"'sha256-Tb/yLPy3UJES1Tym3vMngwjKe4mYW5nN6mpxMZQddns='"
 	],
 	"/impressum": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-wHef6Nn+vhmxIRjozWxj6HAqCisqg4h9tfGM1IRwyNo='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-q3jxitOOotzU12ntNIFYArlAyi4XqRXG9z0ZCE5eI54='"
+		"'sha256-C+s0BLxVqnfRQnq6e4YJVH+ofwE5nA3XQ5GGaXSSPTs='"
 	],
 	"/": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-Q24CyFYaykz3/jmXuhLM9xDAr2mYyxFDxAdxXUM2+sw='"
+		"'sha256-G8lVSzCIYy8lzj7kPOj8oGl8+8IsCy7j/4tRMVD3Lds='"
+	],
+	"/kontakt": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-yPEbLt4A1tzD6p9Xw1xHi++k1uZmexcn9TVfIuoBH7Q='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-3SfQJFSTNc/5UoL3ic3lmC/Aa6v5Eyie1VuKvxAwK0o='"
 	]
 }
