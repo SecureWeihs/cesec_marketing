@@ -1,13 +1,13 @@
 /**
- * Laufende Prüfung nach Abschnitt 14.6 des Briefs.
+ * Laufende Prüfung einer erreichbaren Instanz.
  *
  * Prüft eine laufende Instanz gegen die verbindlichen Vorgaben:
- *   1. alle Antwort-Header aus Abschnitt 14.1, mit exaktem Wert
+ *   1. alle Sicherheits-Antwort-Header, mit exaktem Wert
  *   2. Content-Security-Policy ohne 'unsafe-inline' und ohne 'unsafe-eval'
  *   3. jedes Inline-Skript im ausgelieferten HTML ist per Hash gedeckt
- *   4. keine Ressource von einem fremden Host (Abnahmekriterium 3)
- *   5. genau eine E-Mail-Adresse unter cesec.at (Abnahmekriterium 17)
- *   6. security.txt erreichbar und gültig (Abschnitt 14.3)
+ *   4. keine Ressource von einem fremden Host
+ *   5. genau eine E-Mail-Adresse unter cesec.at
+ *   6. security.txt erreichbar und gültig (RFC 9116)
  *
  * Aufruf: node scripts/pruefe-header.mjs https://cesec.at [weitere Pfade …]
  */

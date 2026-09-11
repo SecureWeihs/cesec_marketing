@@ -20,7 +20,7 @@ function buildKennung(): string {
 }
 
 /**
- * Antwort-Header nach Abschnitt 14.1 des Briefs.
+ * Feste Sicherheits-Antwort-Header.
  * Die Content-Security-Policy steht nicht hier, sondern in src/proxy.ts:
  * sie unterscheidet sich je Seite, weil sie die Inline-Skripte dieser Seite
  * per Hash freigibt.
@@ -50,7 +50,8 @@ const nextConfig: NextConfig = {
 	trailingSlash: false,
 	// Bilder werden nach Entscheidung des Inhabers nicht über next/image
 	// ausgeliefert, sondern als eigenes <picture>-Markup mit zur Bauzeit
-	// erzeugten AVIF- und WebP-Varianten. Siehe OFFENE-PUNKTE.md, E1 Nr. 1.
+	// erzeugten AVIF- und WebP-Varianten: next/image setzt Inline-Styles, die
+	// die Content-Security-Policy nicht erlaubt.
 	images: { unoptimized: true },
 	async headers() {
 		return [

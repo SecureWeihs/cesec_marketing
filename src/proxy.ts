@@ -2,13 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 import hashLandkarte from "@/generated/csp-hashes.json";
 
 /**
- * Content-Security-Policy nach Abschnitt 14.1 des Briefs.
+ * Content-Security-Policy, seitenweise.
  *
- * Abweichung vom Wortlaut des Briefs, begründet: Der Brief schlägt eine
- * Nonce vor. Eine Nonce muss pro Antwort neu erzeugt und in das HTML
+ * Bewusst kein Nonce-Verfahren, obwohl Next.js dafür ausgelegt ist. Eine Nonce muss pro Antwort neu erzeugt und in das HTML
  * geschrieben werden und erzwingt damit serverseitiges Rendern bei jedem
- * Aufruf — im Widerspruch zu Abschnitt 8, der statisch erzeugte Seiten
- * verlangt. Stattdessen werden die Inline-Skripte von Next.js zur Bauzeit
+ * Aufruf — im Widerspruch zu statisch erzeugten Seiten. Stattdessen werden die Inline-Skripte von Next.js zur Bauzeit
  * gehasht (scripts/csp-hashes.mjs). Ergebnis: Seiten bleiben statisch,
  * 'unsafe-inline' und 'unsafe-eval' bleiben draußen, und der Hash bindet
  * die Erlaubnis an genau diesen einen Skriptinhalt — enger als eine Nonce,

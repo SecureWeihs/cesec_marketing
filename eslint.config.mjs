@@ -6,7 +6,7 @@ const konfiguration = [
 	{
 		rules: {
 			// Bilder laufen nach Entscheidung des Inhabers bewusst nicht über
-			// next/image, siehe OFFENE-PUNKTE.md E1 Nr. 1.
+			// next/image; die CSP erlaubt keine Inline-Styles, die next/image setzt.
 			"@next/next/no-img-element": "off",
 		},
 	},

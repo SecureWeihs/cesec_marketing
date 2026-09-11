@@ -8,6 +8,18 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "Abhängigkeiten"
+    ignore:
+      # ESLint 10 und TypeScript 7 sind bewusst zurückgehalten: typescript-eslint,
+      # das eslint-config-next mitbringt, unterstützt weder die Scope-Manager-API
+      # von ESLint 10 noch die TypeScript-7-API. Beide Sprünge brechen `npm run lint`
+      # sofort. Wieder freigeben, sobald typescript-eslint nachgezogen hat.
+      - dependency-name: eslint
+        versions: [">=10"]
+      - dependency-name: typescript
+        versions: [">=7"]
+      # Die Typen bleiben auf der Hauptversion der Laufzeit (Node 24).
+      - dependency-name: "@types/node"
+        versions: [">=25"]
   - package-ecosystem: github-actions
     directory: /
     schedule:

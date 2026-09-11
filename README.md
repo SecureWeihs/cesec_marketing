@@ -1,8 +1,9 @@
 # cesec.at
 
 Website der Cesec e. U., Beratung für Informationssicherheit.
-Maßgeblich ist `PROJEKT-BRIEF.md`; offene Fragen und dokumentierte Abweichungen
-stehen in `OFFENE-PUNKTE.md`.
+Die Spezifikation und die Liste der offenen Punkte liegen außerhalb dieses
+Repositorys; die Entscheidungen, die den Code prägen, sind unten und in den
+Quelldateien selbst begründet.
 
 ## Stack
 
@@ -22,7 +23,7 @@ npm run dev      # http://localhost:3000
 | `npm run build` | baut, erzeugt die CSP-Hashes und prüft sie gegen den Build |
 | `npm run typecheck` | TypeScript ohne Ausgabe |
 | `npm run lint` | ESLint |
-| `npm run pruefe:header` | prüft eine laufende Instanz gegen Abschnitt 14 des Briefs |
+| `npm run pruefe:header` | prüft eine laufende Instanz gegen die Sicherheitsvorgaben |
 
 Einmalig nach dem Klonen, damit kein Versehen direkt auf `main` landet:
 
@@ -32,8 +33,8 @@ cp scripts/git-hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-pus
 
 ## Warum der Build zweimal läuft
 
-Der Brief verlangt statisch erzeugte Seiten (Abschnitt 8) **und** eine
-Content-Security-Policy ohne `'unsafe-inline'` (Abschnitt 14.1). Next.js
+Verlangt sind statisch erzeugte Seiten **und** eine Content-Security-Policy
+ohne `'unsafe-inline'`. Next.js
 schreibt pro Seite zwei Inline-Skripte in das HTML. Eine Nonce würde beides
 gegeneinander ausspielen, weil sie pro Abruf neu erzeugt werden müsste und
 damit serverseitiges Rendern bei jedem Aufruf erzwingt.
@@ -50,9 +51,15 @@ Stattdessen werden die Inline-Skripte gehasht:
 Damit das deterministisch bleibt, hängt die Build-ID am Commit
 (`generateBuildId` in `next.config.ts`) und nicht an einem Zufallswert.
 
+`src/generated/csp-hashes.json` ist deshalb im Repository nur ein Platzhalter:
+die Hashes hängen an der Build-ID und damit am Commit, der sie enthält — die
+Datei kann sich also gar nicht selbst enthalten. Verbindlich ist immer das
+Ergebnis von `npm run build`, und Schritt 4 bricht ab, falls es nicht passt.
+`next build` allein genügt deshalb nie für ein Deployment.
+
 ## Sicherheit
 
-Alle Antwort-Header aus Abschnitt 14.1 stehen in `next.config.ts`, die
+Alle festen Antwort-Header stehen in `next.config.ts`, die
 seitenweise CSP in `src/proxy.ts`. `scripts/pruefe-header.mjs` prüft eine
 laufende Instanz gegen genau diese Vorgaben und läuft in der CI gegen den
 frischen Build. Meldungen zu Schwachstellen: siehe

@@ -2,7 +2,7 @@
 
 /*
  * Schriften: selbst gehostet, variabel, Subsets latin und latin-ext.
- * Kein Google-Fonts-CDN, kein Font-CDN überhaupt — Abschnitt 8 des Briefs.
+ * Kein Google-Fonts-CDN, kein Font-CDN überhaupt.
  * Inter und Source Serif 4 stehen unter der SIL Open Font License 1.1,
  * siehe public/fonts/LIZENZEN.md.
  */
@@ -53,7 +53,7 @@
 }
 
 /*
- * Gestaltungstoken nach Abschnitt 17.
+ * Gestaltungstoken.
  * Die Signalfarbe ist aus dem Logo abgeleitet (#0d4d80) und bleibt Fristen,
  * Links und genau einer Handlungsschaltfläche vorbehalten. Kontraste gegen
  * Papierweiß: Text 16,2:1 · Sekundärtext 6,7:1 · Signal 8,6:1.
@@ -104,7 +104,7 @@ p {
 	text-wrap: pretty;
 }
 
-/* Sichtbarer Fokusindikator, Abschnitt 15. Nie ausblenden. */
+/* Sichtbarer Fokusindikator. Nie ausblenden. */
 :focus-visible {
 	outline: 3px solid var(--color-signal);
 	outline-offset: 2px;
@@ -112,7 +112,7 @@ p {
 }
 
 /*
- * Bewegung nur als Antwort auf eine Nutzeraktion, Abschnitt 17,
+ * Bewegung nur als Antwort auf eine Nutzeraktion,
  * und auch dann nur, wenn das Betriebssystem sie nicht abbestellt hat.
  */
 @media (prefers-reduced-motion: reduce) {

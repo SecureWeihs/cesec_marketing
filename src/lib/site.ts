@@ -2,8 +2,8 @@
  * Einzige Quelle für Stammdaten im Code.
  *
  * Ab Schritt 3 wird diese Datei aus content/impressum.yaml erzeugt, damit
- * Impressum, JSON-LD und NAP.md nie auseinanderlaufen (Abschnitt 11 und 13).
- * Bis dahin gilt sie als Vorstufe; die Werte sind in OFFENE-PUNKTE.md belegt.
+ * Impressum, JSON-LD und NAP.md nie auseinanderlaufen. Bis dahin gilt sie als
+ * Vorstufe.
  */
 export const site = {
 	name: "Cesec e. U.",
@@ -14,7 +14,7 @@ export const site = {
 		anzeige: "+43 650 66 33 004",
 		e164: "+436506633004",
 	},
-	/** Genau eine E-Mail-Adresse im gesamten Auftritt, Abschnitt 7.8. */
+	/** Genau eine E-Mail-Adresse im gesamten Auftritt. Ein Test erzwingt das. */
 	email: "sw@cesec.at",
 	anschrift: {
 		strasse: "Leithenholzweg 1",
