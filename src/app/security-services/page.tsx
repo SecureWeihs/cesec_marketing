@@ -153,7 +153,7 @@ export default function SecurityServicesSeite() {
 					</p>
 					<p className="mt-4">
 						Ein ausführliches Beraterprofil schicke ich auf Anfrage:{" "}
-						<a href={`mailto:${site.email}`}>{site.email}</a>.
+						<a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a>.
 					</p>
 				</section>
 			</Leistungsseite>

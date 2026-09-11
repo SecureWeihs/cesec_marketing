@@ -44,11 +44,11 @@ export default function ImpressumSeite() {
 				</dd>
 				<dt>Telefon</dt>
 				<dd>
-					<a href={`tel:${site.telefon.e164}`}>{site.telefon.anzeige}</a>
+					<a href={`tel:${site.telefon.e164}`} data-umami-event="telefon">{site.telefon.anzeige}</a>
 				</dd>
 				<dt>E-Mail</dt>
 				<dd>
-					<a href={`mailto:${site.email}`}>{site.email}</a>
+					<a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a>
 				</dd>
 			</dl>
 

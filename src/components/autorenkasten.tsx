@@ -21,9 +21,9 @@ export function Autorenkasten() {
 					Manager (CIS, nach EN ISO/IEC 17024).
 				</p>
 				<p className="mt-3">
-					<a href={`tel:${site.telefon.e164}`} className="text-signal">{site.telefon.anzeige}</a>
+					<a href={`tel:${site.telefon.e164}`} data-umami-event="telefon" className="text-signal">{site.telefon.anzeige}</a>
 					{" · "}
-					<a href={`mailto:${site.email}`} className="text-signal">{site.email}</a>
+					<a href={`mailto:${site.email}`} data-umami-event="email" className="text-signal">{site.email}</a>
 					{" · "}
 					<Link href="/about" className="text-signal underline underline-offset-2">Werdegang</Link>
 				</p>

@@ -72,8 +72,8 @@ export default function BarrierefreiheitSeite() {
 			<h2>Barriere melden</h2>
 			<p>
 				Wenn Ihnen etwas auffällt, das die Nutzung erschwert, schreiben Sie
-				bitte an <a href={`mailto:${site.email}`}>{site.email}</a> oder rufen
-				Sie an: <a href={`tel:${site.telefon.e164}`}>{site.telefon.anzeige}</a>.
+				bitte an <a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a> oder rufen
+				Sie an: <a href={`tel:${site.telefon.e164}`} data-umami-event="telefon">{site.telefon.anzeige}</a>.
 				Eine Rückmeldung erfolgt innerhalb eines Werktags. Hilfreich ist die
 				Angabe, welche Seite betroffen ist und womit Sie die Seite bedienen.
 			</p>
