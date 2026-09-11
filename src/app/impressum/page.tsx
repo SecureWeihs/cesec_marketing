@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 import { Textseite } from "@/components/seite";
 
 export const metadata: Metadata = {
-	title: "Impressum",
+	title: "Impressum und Offenlegung nach ECG und MedienG",
 	description:
 		"Offenlegung nach § 5 ECG und § 25 Mediengesetz: Firmenwortlaut, Inhaber, Anschrift, Firmenbuch, UID, Gewerbe und Kammerzugehörigkeit der Cesec e. U.",
 	robots: { index: true, follow: true },

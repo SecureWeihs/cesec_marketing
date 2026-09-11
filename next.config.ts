@@ -63,8 +63,15 @@ const nextConfig: NextConfig = {
 		return [{ source: "/stats/:pfad*", destination: `${umami.replace(/\/$/, "")}/:pfad*` }];
 	},
 	async headers() {
+		// Vorschau-Deployments dürfen nicht in Suchmaschinen landen (Abschnitt
+		// 14.5). Vercel setzt VERCEL_ENV auf "production", "preview" oder
+		// "development"; lokal fehlt die Variable, dann gilt der Schutz nicht.
+		const vorschau = process.env["VERCEL_ENV"] !== undefined && process.env["VERCEL_ENV"] !== "production";
 		return [
 			{ source: "/:path*", headers: sicherheitsHeader },
+			...(vorschau
+				? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }]
+				: []),
 			{
 				source: "/.well-known/security.txt",
 				headers: [

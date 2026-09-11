@@ -8,7 +8,7 @@ import { StrukturierteDaten } from "@/components/strukturierte-daten";
 export const metadata: Metadata = {
 	title: "Sascha Weihs, Informationssicherheitsbeauftragter",
 	description:
-		"Werdegang, Zertifizierungen und Arbeitsweise: Informationssicherheitsbeauftragter mit Aufsichtserfahrung aus Bank und OeNB-Prüfung, von der CIS für ISO/IEC 27001 berufen.",
+		"Werdegang, Zertifizierungen und Arbeitsweise: Informationssicherheitsbeauftragter mit Erfahrung aus Bank und OeNB-Prüfung, von der CIS für ISO 27001 berufen.",
 	openGraph: { images: [{ url: "/og/about.png", width: 1200, height: 630 }] },
 };
 
