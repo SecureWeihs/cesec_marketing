@@ -14,9 +14,13 @@ Keine UI-Bibliothek, kein CMS, keine Datenbank, keine Drittanbieter-Skripte.
 ## Entwickeln
 
 ```bash
-npm ci
+npm ci --ignore-scripts
 npm run dev      # http://localhost:3000
 ```
+
+`--ignore-scripts` ist Absicht: kein Paket soll beim Installieren Code
+ausführen dürfen. Lint, Typen, Build und sämtliche Prüfungen laufen ohne
+Installationsskripte durch, die CI installiert genauso.
 
 | Befehl | Wirkung |
 |---|---|

@@ -14,8 +14,22 @@
  * Aufruf: node scripts/pruefe-barrierefreiheit.mjs http://127.0.0.1:3000 / /impressum
  */
 import { existsSync } from "node:fs";
-import { AxePuppeteer } from "@axe-core/puppeteer";
+import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import puppeteer from "puppeteer-core";
+
+/*
+ * axe-core wird direkt in die Seite eingespielt, statt über den Adapter
+ * @axe-core/puppeteer. Der Adapter zieht das vollständige puppeteer nach sich,
+ * dessen Installationsskript einen eigenen Chrome herunterlädt — den wir nicht
+ * brauchen, weil der im System vorhandene verwendet wird, und den die Vorgabe
+ * zu Abhängigkeiten ohnehin ausschließt. Der Adapter spart genau die zehn
+ * Zeilen darunter.
+ */
+const axeQuelle = await readFile(
+	createRequire(import.meta.url).resolve("axe-core/axe.min.js"),
+	"utf8",
+);
 
 const basis = (process.argv[2] ?? "http://127.0.0.1:3000").replace(/\/$/, "");
 const pfade = process.argv.length > 3 ? process.argv.slice(3) : ["/"];
@@ -81,9 +95,24 @@ try {
 			continue;
 		}
 
-		const ergebnis = await new AxePuppeteer(seite)
-			.withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"])
-			.analyze();
+		// Bewusst evaluate statt addScriptTag: ein eingefügtes <script>-Element
+		// würde an der eigenen Content-Security-Policy scheitern. evaluate läuft
+		// über das Debug-Protokoll und ist davon nicht betroffen.
+		await seite.evaluate(axeQuelle);
+		const ergebnis = await seite.evaluate(async () => {
+			return await globalThis.axe.run(globalThis.document, {
+				runOnly: {
+					type: "tag",
+					values: [
+						"wcag2a",
+						"wcag2aa",
+						"wcag21a",
+						"wcag21aa",
+						"best-practice",
+					],
+				},
+			});
+		});
 
 		if (ergebnis.violations.length === 0 && konsole.length === 0) {
 			console.log(`  ✓ ${pfad}`);

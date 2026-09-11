@@ -37,8 +37,11 @@ jobs:
           node-version: 24
           cache: npm
 
+      # --ignore-scripts: kein Paket im Baum darf beim Installieren Code
+      # ausführen. Geprüft, dass Lint, Typen, Build und alle Prüfungen ohne
+      # Installationsskripte durchlaufen.
       - name: Abhängigkeiten aus dem Lockfile installieren
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Lint
         run: npm run lint
