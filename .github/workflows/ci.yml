@@ -49,6 +49,9 @@ jobs:
       - name: Bauen, inklusive Abgleich der CSP-Hashes
         run: npm run build
 
+      - name: Ausgelieferte Bilder auf Metadaten prüfen
+        run: npm run pruefe:bilder
+
       - name: Bekannte Schwachstellen in Abhängigkeiten
         run: npm audit --audit-level=high
 

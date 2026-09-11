@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { hauptnavigation, site } from "@/lib/site";
+import { Logo } from "@/components/logo";
 
 /**
  * Telefonnummer permanent sichtbar, auf Mobil als Tap-to-Call.
@@ -10,9 +11,13 @@ export function Kopfzeile() {
 			<div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-4">
 				<Link
 					href="/"
-					className="font-serif text-xl font-semibold tracking-tight text-tinte no-underline"
+					className="flex items-center gap-2.5 text-tinte no-underline"
+					aria-label="Cesec, zur Startseite"
 				>
-					Cesec
+					<Logo klasse="h-7 w-auto text-signal" titel="" />
+					<span className="font-serif text-xl font-semibold tracking-tight">
+						Cesec
+					</span>
 				</Link>
 
 				<nav aria-label="Hauptnavigation" className="order-3 w-full sm:order-2 sm:w-auto">
