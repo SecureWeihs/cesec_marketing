@@ -49,6 +49,9 @@ jobs:
       - name: Typen prüfen
         run: npm run typecheck
 
+      - name: Tests
+        run: npm test
+
       - name: Bauen, inklusive Abgleich der CSP-Hashes
         run: npm run build
 
@@ -73,7 +76,10 @@ jobs:
       - name: Ausgelieferte Seiten prüfen
         env:
           CHROME_PATH: /usr/bin/google-chrome
-          SEITEN: / /impressum /datenschutz /barrierefreiheit
+          SEITEN: >-
+            / /about /kontakt /nis2-nisg-2026 /nis2-nisg-2026/betroffenheit-pruefen
+            /iso-27001 /security-services /referenzen
+            /impressum /datenschutz /barrierefreiheit
         run: |
           npx next start -p 3000 &
           server=$!
