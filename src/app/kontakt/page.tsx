@@ -24,7 +24,7 @@ export default function KontaktSeite() {
 		>
 			<p className="!mt-0">
 				<a
-					href={`tel:${site.telefon.e164}`}
+					href={`tel:${site.telefon.e164}`} data-umami-event="telefon"
 					className="font-serif text-3xl font-semibold !no-underline sm:text-4xl"
 				>
 					{site.telefon.anzeige}
@@ -34,7 +34,7 @@ export default function KontaktSeite() {
 			<dl>
 				<dt>E-Mail</dt>
 				<dd>
-					<a href={`mailto:${site.email}`}>{site.email}</a>
+					<a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a>
 				</dd>
 				<dt>Postanschrift</dt>
 				<dd>

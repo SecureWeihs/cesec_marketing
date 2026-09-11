@@ -163,8 +163,8 @@ export default function UeberMichSeite() {
 
 				<h2>Kontakt</h2>
 				<p>
-					Telefon <a href={`tel:${site.telefon.e164}`}>{site.telefon.anzeige}</a>,
-					E-Mail <a href={`mailto:${site.email}`}>{site.email}</a>, oder über{" "}
+					Telefon <a href={`tel:${site.telefon.e164}`} data-umami-event="telefon">{site.telefon.anzeige}</a>,
+					E-Mail <a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a>, oder über{" "}
 					<a href={site.linkedin} rel="noopener noreferrer me">
 						LinkedIn
 					</a>

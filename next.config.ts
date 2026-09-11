@@ -53,6 +53,15 @@ const nextConfig: NextConfig = {
 	// erzeugten AVIF- und WebP-Varianten: next/image setzt Inline-Styles, die
 	// die Content-Security-Policy nicht erlaubt.
 	images: { unoptimized: true },
+	/**
+	 * Reichweitenmessung über den eigenen Origin (src/lib/analyse.ts). Ohne
+	 * UMAMI_HOST gibt es keine Weiterleitung, und /stats liefert 404.
+	 */
+	async rewrites() {
+		const umami = process.env["UMAMI_HOST"];
+		if (!umami) return [];
+		return [{ source: "/stats/:pfad*", destination: `${umami.replace(/\/$/, "")}/:pfad*` }];
+	},
 	async headers() {
 		return [
 			{ source: "/:path*", headers: sicherheitsHeader },

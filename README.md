@@ -163,6 +163,14 @@ PNG-Vorlage nachgezogen, weil kein Vektorlogo vorliegt; der Farbverlauf der
 Vorlage ist dabei entfallen. Kein Bild läuft über `next/image`: die Komponente
 setzt Inline-Styles, die die Content-Security-Policy nicht erlaubt.
 
+## Reichweitenmessung
+
+Vorbereitet, standardmäßig aus. Einschalten und Monatsbericht: siehe
+`docs/analyse-einrichten.md`. Messung und der zugehörige Abschnitt der
+Datenschutzerklärung schalten sich gemeinsam; ohne festgelegte Speicherdauer
+bricht der Build bei eingeschalteter Messung ab. Echte Monatsberichte unter
+`reports/` werden nicht versioniert, weil das Repository öffentlich ist.
+
 ## Sicherheit
 
 Alle festen Antwort-Header stehen in `next.config.ts`, die

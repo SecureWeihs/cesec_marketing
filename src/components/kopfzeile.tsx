@@ -39,7 +39,7 @@ export function Kopfzeile() {
 				</nav>
 
 				<a
-					href={`tel:${site.telefon.e164}`}
+					href={`tel:${site.telefon.e164}`} data-umami-event="telefon"
 					className="order-2 text-sm font-medium text-signal no-underline sm:order-3"
 				>
 					{site.telefon.anzeige}

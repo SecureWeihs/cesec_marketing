@@ -100,7 +100,7 @@ export default function Startseite() {
 
 				<div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
 					<a
-						href={`tel:${site.telefon.e164}`}
+						href={`tel:${site.telefon.e164}`} data-umami-event="telefon"
 						className="inline-block bg-signal px-5 py-3 font-medium text-papier no-underline hover:bg-signal-tief"
 					>
 						Erstgespräch vereinbaren: {site.telefon.anzeige}
@@ -252,14 +252,14 @@ export default function Startseite() {
 				</p>
 				<p className="mt-4">
 					<a
-						href={`tel:${site.telefon.e164}`}
+						href={`tel:${site.telefon.e164}`} data-umami-event="telefon"
 						className="font-serif text-3xl font-semibold text-signal no-underline"
 					>
 						{site.telefon.anzeige}
 					</a>
 				</p>
 				<p className="mt-2">
-					<a href={`mailto:${site.email}`} className="text-signal underline underline-offset-2">
+					<a href={`mailto:${site.email}`} data-umami-event="email" className="text-signal underline underline-offset-2">
 						{site.email}
 					</a>
 				</p>

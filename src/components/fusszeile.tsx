@@ -21,12 +21,12 @@ export function Fusszeile() {
 					<p className="font-medium">Kontakt</p>
 					<ul className="mt-2 space-y-1">
 						<li>
-							<a href={`tel:${site.telefon.e164}`} className="text-signal">
+							<a href={`tel:${site.telefon.e164}`} data-umami-event="telefon" className="text-signal">
 								{site.telefon.anzeige}
 							</a>
 						</li>
 						<li>
-							<a href={`mailto:${site.email}`} className="text-signal">
+							<a href={`mailto:${site.email}`} data-umami-event="email" className="text-signal">
 								{site.email}
 							</a>
 						</li>

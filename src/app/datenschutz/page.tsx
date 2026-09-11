@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { analyse } from "@/lib/analyse";
 import { impressum } from "@/lib/impressum";
 import { site } from "@/lib/site";
 import { Textseite } from "@/components/seite";
@@ -14,10 +15,11 @@ export const metadata: Metadata = {
 const STAND = "2026-09-11";
 
 /*
- * TODO(schritt-8): Sobald die Reichweitenmessung (Umami, eigene Instanz in der
- * EU) in Betrieb geht, kommt hier ein eigener Abschnitt dazu: Werkzeug, Zweck,
- * Rechtsgrundlage, Speicherdauer, Hosting. Bis dahin beschreibt Abschnitt 2
- * den tatsächlichen Zustand — es findet keine Analyse statt.
+ * Die Reichweitenmessung (src/lib/analyse.ts) und ihr Abschnitt hier
+ * schalten sich gemeinsam: Ist die Messung aus, steht in Abschnitt 2, dass
+ * keine Analyse stattfindet, und der Abschnitt zur Messung fehlt. Die
+ * Angaben zu Umami sind am Quellcode von Umami 3.3.1 geprüft (gespeicherte
+ * Felder in api/send, Sitzungskennung in lib/crypto, Tracker-Felder).
  *
  * TODO(inhaber): Anbieter des Postfachs sw@cesec.at und alle weiteren Systeme,
  * die unter cesec.at versenden, für die Liste der Auftragsverarbeiter.
@@ -47,26 +49,37 @@ export default function DatenschutzSeite() {
 				<br />
 				{anschrift.land}
 				<br />
-				<a href={`mailto:${site.email}`}>{site.email}</a>
+				<a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a>
 				<br />
-				<a href={`tel:${site.telefon.e164}`}>{site.telefon.anzeige}</a>
+				<a href={`tel:${site.telefon.e164}`} data-umami-event="telefon">{site.telefon.anzeige}</a>
 			</p>
 
 			<h2>2. Grundsatz</h2>
 			<p>
 				Diese Website erhebt so wenig Daten wie möglich. Sie setzt{" "}
-				<strong>keine Cookies</strong>, bindet <strong>keine Dienste
-				Dritter</strong> ein und verwendet <strong>keine
-				Analyse-Software</strong>. Es werden keine Inhalte von fremden Servern
-				nachgeladen — Schriften, Bilder und Skripte liegen ausschließlich auf
-				dem eigenen Server. Ihr Browser stellt beim Aufruf dieser Seite also
-				keine Verbindung zu Dritten her.
+				<strong>keine Cookies</strong> und bindet <strong>keine Dienste
+				Dritter</strong> ein.{" "}
+				{analyse.aktiv ? (
+					<>
+						Zur Reichweitenmessung wird eine selbst betriebene Instanz der
+						Software Umami verwendet, ohne Cookies und ohne Speicherung von
+						IP-Adressen (Abschnitt 6).
+					</>
+				) : (
+					<>
+						Sie verwendet <strong>keine Analyse-Software</strong>.
+					</>
+				)}{" "}
+				Es werden keine Inhalte von fremden Servern nachgeladen — Schriften,
+				Bilder und Skripte liegen ausschließlich auf dem eigenen Server. Ihr
+				Browser stellt beim Aufruf dieser Seite also keine Verbindung zu
+				Dritten her.
 			</p>
 			<p>
-				Weil keine Cookies gesetzt werden und keine Analyse stattfindet, gibt
-				es auch kein Einwilligungsbanner. Sollte sich das ändern, wird diese
-				Erklärung vorher angepasst und, soweit erforderlich, eine echte
-				Einwilligung eingeholt.
+				Weil keine Cookies gesetzt werden, gibt es auch kein
+				Einwilligungsbanner. Sollte sich das ändern, wird diese Erklärung
+				vorher angepasst und, soweit erforderlich, eine echte Einwilligung
+				eingeholt.
 			</p>
 
 			<h2>3. Hosting und Server-Protokolle</h2>
@@ -125,7 +138,59 @@ export default function DatenschutzSeite() {
 				Datenschutzerklärung von LinkedIn.
 			</p>
 
-			<h2>6. Auftragsverarbeiter</h2>
+			{analyse.aktiv && analyse.aufbewahrungMonate !== null && analyse.datenbank !== null && (
+				<>
+					<h2>6. Reichweitenmessung mit Umami</h2>
+					<p>
+						Um zu verstehen, welche Inhalte gelesen werden und über welche Wege
+						Besucher auf diese Website kommen, wird die Open-Source-Software
+						Umami eingesetzt. Sie läuft auf eigener Infrastruktur, nicht bei
+						einem Analyseanbieter. Ihr Browser spricht dabei nur mit dieser
+						Website; die Daten werden serverseitig an die Umami-Instanz
+						weitergegeben.
+					</p>
+					<dl>
+						<dt>Erfasste Daten</dt>
+						<dd>
+							Aufgerufene Adresse und Seitentitel, verweisende Seite, Browser,
+							Betriebssystem, Gerätetyp, Bildschirmgröße, Sprache sowie Land,
+							Region und Stadt, abgeleitet aus der IP-Adresse. Dazu anonyme
+							Zählereignisse: Klick auf die Telefonnummer, Klick auf die
+							E-Mail-Adresse, Abschluss des Selbstchecks — ohne Inhalte oder
+							Eingaben.
+						</dd>
+						<dt>Keine IP-Adressen, keine Cookies</dt>
+						<dd>
+							Die IP-Adresse wird nicht gespeichert. Aus IP-Adresse,
+							Browserkennung und einem{" "}
+							{analyse.saltWechsel === "day" ? "täglich" : analyse.saltWechsel === "week" ? "wöchentlich" : "monatlich"}{" "}
+							wechselnden Zufallswert wird eine Einweg-Kennung gebildet, mit der
+							sich Aufrufe derselben Sitzung zusammenfassen lassen. Nach dem
+							Wechsel des Zufallswerts ist keine Verbindung zu früheren
+							Aufrufen mehr möglich. Es werden keine Cookies gesetzt und nichts
+							im Browser gespeichert. Ist in Ihrem Browser „Do Not Track“
+							aktiviert, findet keine Messung statt.
+						</dd>
+						<dt>Zweck</dt>
+						<dd>Verbesserung der Inhalte und Messung der Reichweite</dd>
+						<dt>Rechtsgrundlage</dt>
+						<dd>
+							Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einer
+							datensparsamen Reichweitenmessung
+						</dd>
+						<dt>Speicherdauer</dt>
+						<dd>{analyse.aufbewahrungMonate} Monate, danach werden die Daten gelöscht</dd>
+						<dt>Betrieb</dt>
+						<dd>
+							Umami-Instanz bei Vercel Inc., Region Frankfurt am Main;
+							Datenbank bei {analyse.datenbank.anbieter}, Region{" "}
+							{analyse.datenbank.region}
+						</dd>
+					</dl>
+				</>
+			)}
+
+			<h2>{analyse.aktiv ? "7" : "6"}. Auftragsverarbeiter</h2>
 			<table>
 				<thead>
 					<tr>
@@ -149,7 +214,7 @@ export default function DatenschutzSeite() {
 				eingesetzt.
 			</p>
 
-			<h2>7. Speicherdauer</h2>
+			<h2>{analyse.aktiv ? "8" : "7"}. Speicherdauer</h2>
 			<p>
 				Personenbezogene Daten werden nur so lange gespeichert, wie es für den
 				jeweiligen Zweck erforderlich ist oder gesetzliche
@@ -158,7 +223,7 @@ export default function DatenschutzSeite() {
 				vorgeschrieben ist.
 			</p>
 
-			<h2>8. Ihre Rechte</h2>
+			<h2>{analyse.aktiv ? "9" : "8"}. Ihre Rechte</h2>
 			<p>Ihnen stehen gegenüber dem Verantwortlichen folgende Rechte zu:</p>
 			<ul>
 				<li>Auskunft über die zu Ihrer Person verarbeiteten Daten (Art. 15 DSGVO)</li>
@@ -173,10 +238,10 @@ export default function DatenschutzSeite() {
 			</ul>
 			<p>
 				Zur Ausübung genügt eine formlose Nachricht an{" "}
-				<a href={`mailto:${site.email}`}>{site.email}</a>.
+				<a href={`mailto:${site.email}`} data-umami-event="email">{site.email}</a>.
 			</p>
 
-			<h2>9. Beschwerderecht</h2>
+			<h2>{analyse.aktiv ? "10" : "9"}. Beschwerderecht</h2>
 			<p>
 				Sie haben das Recht, sich bei einer Aufsichtsbehörde zu beschweren.
 				Zuständig ist in Österreich die Datenschutzbehörde, Barichgasse 40–42,
@@ -188,7 +253,7 @@ export default function DatenschutzSeite() {
 				.
 			</p>
 
-			<h2>10. Stand</h2>
+			<h2>{analyse.aktiv ? "11" : "10"}. Stand</h2>
 			<p>
 				Diese Erklärung hat den Stand vom{" "}
 				<time dateTime={STAND}>11. September 2026</time>. Sie wird angepasst,

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { site } from "@/lib/site";
 import { unternehmen } from "@/lib/strukturierte-daten";
 import { StrukturierteDaten } from "@/components/strukturierte-daten";
+import { AnalyseSkript } from "@/components/analyse-skript";
 import { Kopfzeile } from "@/components/kopfzeile";
 import { Fusszeile } from "@/components/fusszeile";
 import "./globals.css";
@@ -66,6 +67,7 @@ export default function RootLayout({
 					{children}
 				</main>
 				<Fusszeile />
+				<AnalyseSkript />
 			</body>
 		</html>
 	);
