@@ -131,3 +131,53 @@ export function person(): Knoten {
 		sameAs: [impressum.profile.linkedin],
 	};
 }
+
+/**
+ * Eine Leistung. Ohne offers und ohne Preis — Preisangaben gibt es auf dieser
+ * Website nicht, auch nicht maschinenlesbar.
+ */
+export function leistung({
+	name,
+	pfad,
+	beschreibung,
+	art,
+}: {
+	name: string;
+	pfad: string;
+	beschreibung: string;
+	art: string;
+}): Knoten {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Service",
+		"@id": `${site.url}${pfad}#leistung`,
+		name,
+		serviceType: art,
+		description: beschreibung,
+		url: `${site.url}${pfad}`,
+		provider: { "@id": `${site.url}/#unternehmen` },
+		areaServed: ["Wien", "Niederösterreich", "Österreich"].map((ort) => ({
+			"@type": "AdministrativeArea",
+			name: ort,
+		})),
+	};
+}
+
+/**
+ * Häufige Fragen. Nur verwenden, wenn genau diese Fragen und Antworten auch
+ * sichtbar auf der Seite stehen — sonst verstößt die Auszeichnung gegen die
+ * Richtlinien von Google. Die FAQ-Komponente erzeugt beides aus derselben Liste.
+ */
+export function haeufigeFragen(
+	fragen: readonly { frage: string; antwort: string }[],
+): Knoten {
+	return {
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: fragen.map((eintrag) => ({
+			"@type": "Question",
+			name: eintrag.frage,
+			acceptedAnswer: { "@type": "Answer", text: eintrag.antwort },
+		})),
+	};
+}
