@@ -57,6 +57,39 @@ Datei kann sich also gar nicht selbst enthalten. Verbindlich ist immer das
 Ergebnis von `npm run build`, und Schritt 4 bricht ab, falls es nicht passt.
 `next build` allein genügt deshalb nie für ein Deployment.
 
+## Bilder und Symbole
+
+Alles unter `public/bilder`, `public/og` sowie die Symbole und `logo.svg` sind
+Erzeugnisse. Quelle ist `assets/source/`, das weder ausgeliefert noch versioniert
+wird: dort liegen die unbearbeiteten Dateien mitsamt ihren Metadaten.
+
+```bash
+npm run assets          # erzeugt alles neu aus assets/source
+npm run pruefe:bilder   # scheitert, sobald eine Datei Metadaten trägt
+```
+
+`assets/source/` enthält dafür:
+
+| Datei | Zweck |
+|---|---|
+| `pb_2026.jpg` | Porträt, 1230 × 1830 mit 15 px schwarzem Rahmen |
+| `Cesec Logo_größer.png` | Vorlage der Bildmarke |
+| `schriften/Inter-{Regular,SemiBold}.ttf` | Schrift für die Vorschaubilder |
+| `schriften/SourceSerif4-Semibold.otf` | Schrift für die Vorschaubilder |
+| `fontconfig/fonts.conf` | damit librsvg die beiden findet |
+
+Die statischen Schriftschnitte stammen aus den Veröffentlichungen von
+[rsms/inter](https://github.com/rsms/inter/releases) und
+[adobe-fonts/source-serif](https://github.com/adobe-fonts/source-serif), beide
+SIL OFL 1.1. Fehlen sie, läuft `npm run assets` trotzdem durch und meldet, dass
+die Vorschaubilder mit Ersatzschriften gesetzt wurden.
+
+Die Bildmarke liegt als Vektorpfad in `src/lib/logo.ts` und ist die einzige
+Quelle für Kopfzeile, Favicons und Vorschaubilder. Sie wurde aus der
+PNG-Vorlage nachgezogen, weil kein Vektorlogo vorliegt; der Farbverlauf der
+Vorlage ist dabei entfallen. Kein Bild läuft über `next/image`: die Komponente
+setzt Inline-Styles, die die Content-Security-Policy nicht erlaubt.
+
 ## Sicherheit
 
 Alle festen Antwort-Header stehen in `next.config.ts`, die

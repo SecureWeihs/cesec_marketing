@@ -14,6 +14,29 @@ export const metadata: Metadata = {
 		"Externer Informationssicherheitsbeauftragter für Unternehmen, die das NISG 2026 oder ISO 27001 erfüllen müssen. Aufsichtserfahrung aus Bank und Prüfung.",
 	authors: [{ name: site.inhaber, url: `${site.url}/about` }],
 	robots: { index: true, follow: true },
+	manifest: "/site.webmanifest",
+	icons: {
+		icon: [
+			{ url: "/favicon.ico", sizes: "32x32" },
+			{ url: "/favicon.svg", type: "image/svg+xml" },
+		],
+		apple: "/apple-touch-icon.png",
+	},
+	openGraph: {
+		type: "website",
+		locale: "de_AT",
+		siteName: site.name,
+		url: site.url,
+		images: [
+			{
+				url: "/og/standard.png",
+				width: 1200,
+				height: 630,
+				alt: "Cesec e. U., externer Informationssicherheitsbeauftragter.",
+			},
+		],
+	},
+	twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
