@@ -32,7 +32,9 @@ function sichtbarerText(html) {
 	return entschluesseln(
 		html
 			.replace(/<(script|style|noscript)[^>]*>[\s\S]*?<\/\1>/g, " ")
-			.replace(/<!--[\s\S]*?-->/g, "")
+			// Kommentare und Tags werden durch ein Leerzeichen ersetzt, nicht
+			// entfernt: So kann aus Resten kein neues Tag zusammenwachsen. Die
+			// Kommentarmarken von React fallen dabei mit weg.
 			.replace(/<[^>]+>/g, " "),
 	).replace(/\s+/g, " ");
 }
