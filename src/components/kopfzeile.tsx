@@ -2,7 +2,7 @@ import Link from "next/link";
 import { hauptnavigation, site } from "@/lib/site";
 
 /**
- * Telefonnummer permanent sichtbar, auf Mobil als Tap-to-Call (Abschnitt 6).
+ * Telefonnummer permanent sichtbar, auf Mobil als Tap-to-Call.
  */
 export function Kopfzeile() {
 	return (

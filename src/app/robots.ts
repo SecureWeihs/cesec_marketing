@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 
 /**
- * Abschnitt 9.1: alles erlaubt außer /api/, KI-Crawler ausdrücklich zugelassen.
+ * Alles erlaubt außer /api/. KI-Crawler sind ausdrücklich zugelassen.
  */
 export default function robots(): MetadataRoute.Robots {
 	return {

@@ -2,8 +2,8 @@
  * Erzeugt die SHA-256-Hashes aller Inline-Skripte, die Next.js in das
  * vorgerenderte HTML schreibt, und legt sie als Landkarte Pfad → Hashes ab.
  *
- * Hintergrund: Abschnitt 8 des Briefs verlangt statisch erzeugte Seiten,
- * Abschnitt 14.1 eine Content-Security-Policy ohne 'unsafe-inline'. Eine Nonce
+ * Hintergrund: Verlangt sind statisch erzeugte Seiten und eine
+ * Content-Security-Policy ohne 'unsafe-inline'. Eine Nonce
  * kann beides nicht zugleich erfüllen, weil sie pro Antwort neu erzeugt und
  * dafür in das HTML geschrieben werden müsste — was serverseitiges Rendern bei
  * jedem Aufruf erzwingt. Hashes lösen das: sie stehen zur Bauzeit fest, die

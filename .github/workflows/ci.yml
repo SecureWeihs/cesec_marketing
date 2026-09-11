@@ -1,10 +1,9 @@
-# Prüfkette nach Abschnitt 14.4 und 14.6 des Briefs.
+# Prüfkette für jeden Pull Request und jeden Stand auf main.
 #
 # Alle Actions sind auf einen Commit-SHA festgenagelt, nicht auf einen
 # beweglichen Tag. Jeder Job bekommt ausdrücklich die kleinstmöglichen Rechte.
-# Secret Scanning, Push Protection und CodeQL stehen auf einem privaten
-# Repository nicht zur Verfügung; gitleaks und semgrep treten an ihre Stelle
-# (siehe OFFENE-PUNKTE.md, E1 Nr. 2).
+# gitleaks und semgrep laufen zusätzlich zu Secret Scanning und CodeQL:
+# sie prüfen jeden Pull Request unabhängig von den GitHub-Diensten.
 
 name: Prüfung
 
