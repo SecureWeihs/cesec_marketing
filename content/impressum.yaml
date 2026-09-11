@@ -1,0 +1,71 @@
+# Stammdaten der Cesec e. U. — einzige Quelle für Impressum, NAP.md und JSON-LD.
+#
+# Wer hier etwas ändert, ändert es überall. Nach jeder Änderung:
+#   npm run nap      schreibt NAP.md neu
+#   npm run build    prüft, dass NAP.md und die Stammdaten übereinstimmen
+#
+# Die Schreibweise ist zeichengenau bindend. Sie muss identisch in der
+# Website, im Google-Unternehmensprofil, im WKO-Firmen-A-Z, auf herold.at,
+# firmenabc.at und im LinkedIn-Unternehmensprofil stehen.
+
+firmenwortlaut: Cesec e. U.
+inhaber: Dipl.-Ing. Sascha Weihs
+rechtsform: Einzelunternehmen, eingetragen im Firmenbuch
+
+anschrift:
+  strasse: Leithenholzweg 1
+  plz: "3052"
+  ort: Innermanzing
+  land: Österreich
+  landCode: AT
+
+telefon:
+  anzeige: +43 650 66 33 004
+  e164: "+436506633004"
+
+email: sw@cesec.at
+website: https://cesec.at
+
+unternehmensgegenstand: >-
+  Beratung im Bereich Informationssicherheit, insbesondere Aufbau und Betrieb
+  von Informationssicherheits-Managementsystemen nach ISO/IEC 27001, Umsetzung
+  der Anforderungen des NISG 2026 und Wahrnehmung der Rolle des externen
+  Informationssicherheitsbeauftragten.
+
+firmenbuch:
+  nummer: FN 603544s
+  gericht: Landesgericht St. Pölten
+
+umsatzsteuer:
+  uid: ATU79401648
+
+gewerbe:
+  # Wortlaut aus dem Firmenbucheintrag.
+  wortlaut: >-
+    Unternehmensberatung einschließlich der Unternehmensorganisation gemäß
+    § 94 Z 74 GewO 1994, eingeschränkt auf Unternehmensorganisation und
+    Technik/Technologie
+  # TODO(inhaber): GISA-Zahl aus dem Gewerberegisterauszug nachtragen.
+  # Solange sie fehlt, bleibt die Zeile im Impressum aus und der Build warnt.
+  gisaZahl: null
+  behoerde: Gemeindeamt Neustift-Innermanzing
+  rechtsvorschrift: Gewerbeordnung 1994 (GewO 1994)
+  rechtsvorschriftUrl: https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10007517
+
+kammer:
+  name: Wirtschaftskammer Niederösterreich
+  fachgruppe: Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie (UBIT)
+  url: https://www.wko.at/noe/ubit
+
+# Offenlegung nach § 25 Mediengesetz.
+medien:
+  medieninhaber: Cesec e. U.
+  grundlegendeRichtung: >-
+    Information über Informationssicherheit, regulatorische Anforderungen und
+    die Leistungen der Cesec e. U.
+
+profile:
+  linkedin: https://www.linkedin.com/in/sascha-weihs/
+  # TODO(inhaber): stabile Profil-URL nachtragen, sobald das
+  # Google-Unternehmensprofil bestätigt und auf Cesec e. U. umbenannt ist.
+  googleUnternehmensprofil: null

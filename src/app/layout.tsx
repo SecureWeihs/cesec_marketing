@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { site } from "@/lib/site";
+import { unternehmen } from "@/lib/strukturierte-daten";
+import { StrukturierteDaten } from "@/components/strukturierte-daten";
 import { Kopfzeile } from "@/components/kopfzeile";
 import { Fusszeile } from "@/components/fusszeile";
 import "./globals.css";
@@ -52,6 +54,7 @@ export default function RootLayout({
 	return (
 		<html lang="de-AT">
 			<body className="flex min-h-screen flex-col">
+				<StrukturierteDaten daten={unternehmen()} />
 				<a
 					href="#inhalt"
 					className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-signal focus:px-4 focus:py-2 focus:text-papier"

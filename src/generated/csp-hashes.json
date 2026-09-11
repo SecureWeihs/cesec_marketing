@@ -1,14 +1,34 @@
 {
 	"/_global-error": [
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-eRmm+1zYKUw9Du16pontzAYqgJEA44iY062oomkxeO8='"
+		"'sha256-pzFBvCpvuq1smKbgi2j5hUdRmGm7J8oYkBallaGB8lU='"
 	],
 	"/_not-found": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-HOtMBtG3EkqkVsx+ZBqD/+yRxRIJ8AgBsSidV30b3xs='"
+		"'sha256-kITEW85PFPwxBpLYb3dk5YFKx/HK6bOeG8r5kP0bCcU='"
+	],
+	"/barrierefreiheit": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-tcMxV0q8WFVz55rlYggLrXhT/uHMoN/pwPFJ+AYFkbo='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-h6CbrNE7+JjzFGLbVG5pKhcTcky9YbkooI3DqIlIPNg='"
+	],
+	"/datenschutz": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-LcgdyZcrZGv35GPf9ZR82LpgfSvN5YUtAU2egMXCEWs='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-j24PltDdXnJYqwnonLQeC6JQu7/XXDHB9WxpGcZJ/3U='"
+	],
+	"/impressum": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-wHef6Nn+vhmxIRjozWxj6HAqCisqg4h9tfGM1IRwyNo='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-WP26t6sVh6T9zZCAgEKTPiY59+FodmVxFBG33/eoRWo='"
 	],
 	"/": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-ZNUDxv63Lt1wbVeemY6+6jNcl7jRcMw9V0NNDgcNM+Q='"
+		"'sha256-UdVvndYKZVKnPsMfn3rmR8+o+tDtoASx4x14D5phizI='"
 	]
 }

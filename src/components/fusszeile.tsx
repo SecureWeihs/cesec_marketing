@@ -1,11 +1,6 @@
 import Link from "next/link";
+import { rechtliches } from "@/lib/navigation";
 import { site } from "@/lib/site";
-
-const rechtliches = [
-	{ pfad: "/impressum", titel: "Impressum" },
-	{ pfad: "/datenschutz", titel: "Datenschutz" },
-	{ pfad: "/barrierefreiheit", titel: "Barrierefreiheit" },
-] as const;
 
 export function Fusszeile() {
 	return (

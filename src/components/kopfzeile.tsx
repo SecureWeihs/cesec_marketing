@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { hauptnavigation, site } from "@/lib/site";
+import { hauptnavigation } from "@/lib/navigation";
+import { site } from "@/lib/site";
 import { Logo } from "@/components/logo";
 
 /**
