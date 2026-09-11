@@ -28,11 +28,11 @@ export const rechtliches = [
  */
 export const unterseiten = [
 	{ pfad: "/nis2-nisg-2026/betroffenheit-pruefen", titel: "Betroffenheit prüfen", verfuegbar: true },
-	{ pfad: "/nis2-nisg-2026/fristen-und-registrierung", titel: "Fristen und Registrierung nach NISG 2026", verfuegbar: false },
-	{ pfad: "/nis2-nisg-2026/haftung-der-geschaeftsfuehrung", titel: "Haftung der Geschäftsführung", verfuegbar: false },
-	{ pfad: "/nis2-nisg-2026/lieferkette-und-fragebogen", titel: "Lieferkette und Lieferantenfragebogen", verfuegbar: false },
-	{ pfad: "/iso-27001/ablauf-der-zertifizierung", titel: "Ablauf der ISO-27001-Zertifizierung", verfuegbar: false },
-	{ pfad: "/iso-27001/interne-audits", titel: "Interne Audits nach ISO 27001", verfuegbar: false },
+	{ pfad: "/nis2-nisg-2026/fristen-und-registrierung", titel: "Fristen und Registrierung nach NISG 2026", verfuegbar: true },
+	{ pfad: "/nis2-nisg-2026/haftung-der-geschaeftsfuehrung", titel: "Haftung der Geschäftsführung", verfuegbar: true },
+	{ pfad: "/nis2-nisg-2026/lieferkette-und-fragebogen", titel: "Lieferkette und Lieferantenfragebogen", verfuegbar: true },
+	{ pfad: "/iso-27001/ablauf-der-zertifizierung", titel: "Ablauf der ISO-27001-Zertifizierung", verfuegbar: true },
+	{ pfad: "/iso-27001/interne-audits", titel: "Interne Audits nach ISO 27001", verfuegbar: true },
 ] as const;
 
 const alle: readonly { pfad: string; verfuegbar: boolean }[] = [

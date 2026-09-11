@@ -181,3 +181,37 @@ export function haeufigeFragen(
 		})),
 	};
 }
+
+/** Ein Leitfaden als Article, verknüpft mit Autor und Unternehmen. */
+export function leitfaden({
+	ueberschrift,
+	beschreibung,
+	pfad,
+	veroeffentlicht,
+	geaendert,
+	suchbegriffe,
+}: {
+	ueberschrift: string;
+	beschreibung: string;
+	pfad: string;
+	veroeffentlicht: string;
+	geaendert: string;
+	suchbegriffe: readonly string[];
+}): Knoten {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"@id": `${site.url}${pfad}#artikel`,
+		headline: ueberschrift,
+		description: beschreibung,
+		url: `${site.url}${pfad}`,
+		mainEntityOfPage: `${site.url}${pfad}`,
+		image: `${site.url}/og/leitfaden.png`,
+		datePublished: veroeffentlicht,
+		dateModified: geaendert,
+		inLanguage: "de-AT",
+		keywords: suchbegriffe.join(", "),
+		author: { "@id": `${site.url}/about#person` },
+		publisher: { "@id": `${site.url}/#unternehmen` },
+	};
+}

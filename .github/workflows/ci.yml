@@ -80,6 +80,10 @@ jobs:
             / /about /kontakt /nis2-nisg-2026 /nis2-nisg-2026/betroffenheit-pruefen
             /iso-27001 /security-services /referenzen
             /impressum /datenschutz /barrierefreiheit
+            /nis2-nisg-2026/fristen-und-registrierung
+            /nis2-nisg-2026/haftung-der-geschaeftsfuehrung
+            /nis2-nisg-2026/lieferkette-und-fragebogen
+            /iso-27001/ablauf-der-zertifizierung /iso-27001/interne-audits
         run: |
           npx next start -p 3000 &
           server=$!
