@@ -1,0 +1,14 @@
+{
+	"/_global-error": [
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-KDQ/5lQyc+6EBuzsHheQMZKy7BnkH/1UTZ36scSuzns='"
+	],
+	"/_not-found": [
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-I2YanpUabAwu8P8OQwI5rZHhNI4pC4adlxcnc9yJVvQ='"
+	],
+	"/": [
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-I/HTZRH2K8yDgJ/AmRaGhXuZsEXx/Vg6EA8W39zoqFs='"
+	]
+}

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Ersatz für die technisch nicht aktivierbare Branch Protection (siehe OFFENE-PUNKTE.md B1).
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+	case "$remote_ref" in
+		refs/heads/main)
+			echo "pre-push: Direkter Push auf main ist gesperrt. Bitte Pull Request verwenden." >&2
+			exit 1
+			;;
+	esac
+done
+exit 0

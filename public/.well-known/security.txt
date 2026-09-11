@@ -1,0 +1,6 @@
+# Sicherheitslücke gefunden? Bitte melden. Deutsch oder Englisch.
+Contact: mailto:sw@cesec.at
+Contact: tel:+436506633004
+Expires: 2027-09-11T00:00:00.000Z
+Preferred-Languages: de, en
+Canonical: https://cesec.at/.well-known/security.txt
