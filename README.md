@@ -81,6 +81,55 @@ Noch nicht gelieferte Angaben stehen als `null` in der YAML-Datei. Sie
 erscheinen dann nirgends auf der Website — kein Platzhalter, keine erfundene
 Zahl — und der Build weist einmal je Lauf darauf hin.
 
+## Leitfaden anlegen oder ändern — ohne Code
+
+Die Leitfäden liegen als Textdateien unter `content/leitfaeden/`, eine Datei
+je Leitfaden. Sie lassen sich direkt auf GitHub im Browser bearbeiten.
+
+**Einen Leitfaden ändern**
+
+1. Auf github.com die Datei unter `content/leitfaeden/` öffnen und auf den
+   Stift („Edit this file“) klicken.
+2. Text ändern. Überschriften beginnen mit `##`, Aufzählungen mit `-`,
+   Verweise schreiben sich `[Ankertext](/pfad)`.
+3. Im Kopf der Datei `dateModified` auf das heutige Datum setzen
+   (`JJJJ-MM-TT`). Das Datum erscheint nirgends sichtbar, steuert aber die
+   Sitemap und die Erinnerung nach zwölf Monaten.
+4. Unten „Commit changes“ → „Create a new branch … and start a pull request“.
+   Die Prüfungen laufen automatisch. Sind sie grün, kann der Pull Request
+   zusammengeführt werden; das Deployment folgt von selbst.
+
+**Einen neuen Leitfaden anlegen**
+
+1. Eine bestehende Datei als Vorlage kopieren und unter neuem Namen speichern.
+   Der Dateiname ist die Adresse: `mein-thema.mdx` wird zu
+   `/nis2-nisg-2026/mein-thema` oder `/iso-27001/mein-thema`, je nach `saeule`.
+2. Im Kopf alle Felder anpassen, `slug` gleich dem Dateinamen ohne `.mdx`.
+3. In `src/lib/navigation.ts` den neuen Pfad unter `unterseiten` mit
+   `verfuegbar: true` eintragen. (Das ist die einzige Zeile Code; der Build
+   meldet, wenn sie fehlt.)
+
+**Was der Build prüft — und was er dann sagt**
+
+| Regel | Warum |
+|---|---|
+| `title` 42 bis 52 Zeichen | mit „ \| Cesec“ 50 bis 60 Zeichen im Browsertab und bei Google |
+| `description` 140 bis 158 Zeichen | vollständig sichtbar in den Suchergebnissen |
+| drei bis fünf `fragen` | werden sichtbar und als FAQ ausgezeichnet |
+| Verweis auf die Elternseite und mindestens einen weiteren Leitfaden | interne Verlinkung |
+| kein „wir“, kein „derzeit“, „seit kurzem“, „in diesem Jahr“ | Autor-Ich, zeitlose Formulierung |
+| keine Eurobeträge, Tagsätze, „kostenlos“ | Preise nur im Erstgespräch |
+| kein „hier klicken“, „mehr erfahren“ | Verweise mit beschreibendem Text |
+
+Verletzt ein Leitfaden eine Regel, bricht der Build ab und nennt Datei, Feld
+und Regel. Nichts Fehlerhaftes geht live.
+
+Leitfäden, die seit mehr als zwölf Monaten nicht geändert wurden, meldet der
+Build zur Überprüfung, ohne abzubrechen.
+
+**Achtung:** Die Dateien sind MDX, also ausführbarer Inhalt. Nur Personen mit
+Schreibrecht auf das Repository dürfen sie ändern.
+
 ## Bilder und Symbole
 
 Alles unter `public/bilder`, `public/og` sowie die Symbole und `logo.svg` sind
