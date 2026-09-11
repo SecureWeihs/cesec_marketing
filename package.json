@@ -17,7 +17,8 @@
 		"assets": "node scripts/assets.mjs",
 		"pruefe:bilder": "node scripts/pruefe-bilder.mjs",
 		"nap": "node scripts/nap.mjs",
-		"pruefe:a11y": "node scripts/pruefe-barrierefreiheit.mjs"
+		"pruefe:a11y": "node scripts/pruefe-barrierefreiheit.mjs",
+		"test": "node --test \"tests/**/*.test.ts\""
 	},
 	"dependencies": {
 		"next": "16.3.4",

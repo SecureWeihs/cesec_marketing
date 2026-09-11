@@ -27,7 +27,7 @@ export const rechtliches = [
  * Seiten werden nirgends verlinkt.
  */
 export const unterseiten = [
-	{ pfad: "/nis2-nisg-2026/betroffenheit-pruefen", titel: "Betroffenheit prüfen", verfuegbar: false },
+	{ pfad: "/nis2-nisg-2026/betroffenheit-pruefen", titel: "Betroffenheit prüfen", verfuegbar: true },
 	{ pfad: "/nis2-nisg-2026/fristen-und-registrierung", titel: "Fristen und Registrierung nach NISG 2026", verfuegbar: false },
 	{ pfad: "/nis2-nisg-2026/haftung-der-geschaeftsfuehrung", titel: "Haftung der Geschäftsführung", verfuegbar: false },
 	{ pfad: "/nis2-nisg-2026/lieferkette-und-fragebogen", titel: "Lieferkette und Lieferantenfragebogen", verfuegbar: false },

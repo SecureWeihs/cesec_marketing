@@ -9,6 +9,7 @@ import { site } from "@/lib/site";
 const SEITEN = [
 	{ pfad: "/", prioritaet: 1 },
 	{ pfad: "/nis2-nisg-2026", prioritaet: 1 },
+	{ pfad: "/nis2-nisg-2026/betroffenheit-pruefen", prioritaet: 0.9 },
 	{ pfad: "/iso-27001", prioritaet: 0.9 },
 	{ pfad: "/security-services", prioritaet: 0.8 },
 	{ pfad: "/referenzen", prioritaet: 0.6 },

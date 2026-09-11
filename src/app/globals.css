@@ -224,6 +224,14 @@ p {
 		color: #000;
 	}
 
+	/* Druckansicht des Selbstchecks: nur Inhalt und Ergebnis, ohne Bedienelemente. */
+	body > header,
+	body > footer,
+	.nicht-drucken,
+	nav[aria-label="Brotkrumen"] {
+		display: none !important;
+	}
+
 	a[href^="http"]::after {
 		content: " (" attr(href) ")";
 		font-size: 0.85em;
