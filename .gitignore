@@ -1,0 +1,52 @@
+# Abhängigkeiten
+node_modules/
+.pnp
+.pnp.js
+
+# Build-Ausgaben
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Umgebungsvariablen (niemals ins Repository)
+.env
+.env.*
+!.env.example
+
+# Hosting
+.vercel/
+
+# Quelldateien der Assets: unbearbeitet, mit Metadaten, nicht ausgeliefert
+assets/source/
+
+# Interne Arbeitsunterlagen gehören nicht in ein öffentliches Repository.
+# Sie liegen unter ../cesec_marketing-intern/
+PROJEKT-BRIEF.md
+OFFENE-PUNKTE.md
+
+# Test- und Prüfausgaben
+coverage/
+playwright-report/
+test-results/
+lighthouse-report.*
+.lighthouseci/
+
+# Werkzeug-Caches
+.eslintcache
+.turbo/
+*.log
+npm-debug.log*
+
+# Betriebssystem und Editor
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
