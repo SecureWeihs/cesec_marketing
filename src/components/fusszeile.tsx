@@ -45,7 +45,7 @@ export function Fusszeile() {
 				<div>
 					<p className="font-medium">Rechtliches</p>
 					<ul className="mt-2 space-y-1">
-						{rechtliches.map((eintrag) => (
+						{rechtliches.filter((eintrag) => eintrag.verfuegbar).map((eintrag) => (
 							<li key={eintrag.pfad}>
 								<Link href={eintrag.pfad} className="text-signal">
 									{eintrag.titel}

@@ -78,9 +78,22 @@ try {
 		const seite = await browser.newPage();
 		const konsole = [];
 		seite.on("console", (nachricht) => {
+			// Die Konsolenmeldung allein nennt die Adresse nicht; die kommt aus
+			// den Abruf-Ereignissen darunter. Doppelmeldungen werden am Ende
+			// zusammengefasst.
 			if (nachricht.type() === "error") konsole.push(nachricht.text());
 		});
 		seite.on("pageerror", (fehler) => konsole.push(String(fehler)));
+		seite.on("requestfailed", (abruf) => {
+			konsole.push(
+				`Abruf fehlgeschlagen: ${abruf.url()} (${abruf.failure()?.errorText ?? "unbekannt"})`,
+			);
+		});
+		seite.on("response", (antwort) => {
+			if (antwort.status() >= 400) {
+				konsole.push(`Status ${antwort.status()} für ${antwort.url()}`);
+			}
+		});
 
 		// "load" statt "networkidle0": Netzruhe abzuwarten hängt sich in
 		// Bauumgebungen an offenen Verbindungen auf, und für axe genügt ein
@@ -130,7 +143,7 @@ try {
 
 		// Eine Konsolenmeldung ist fast immer ein blockierter Abruf oder ein
 		// Verstoß gegen die Content-Security-Policy. Beides ist ein Fehler.
-		for (const zeile of konsole) {
+		for (const zeile of new Set(konsole)) {
 			verstoesse += 1;
 			console.error(`  ✗ ${pfad}: Konsolenfehler — ${zeile}`);
 		}
