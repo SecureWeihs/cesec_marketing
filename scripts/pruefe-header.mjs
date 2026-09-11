@@ -17,10 +17,10 @@ const basis = (process.argv[2] ?? "http://127.0.0.1:3000").replace(/\/$/, "");
 const pfade = process.argv.length > 3 ? process.argv.slice(3) : ["/"];
 
 /** Erlaubte Hosts für Ressourcen: ausschließlich der eigene Origin. */
-const RESSOURCEN_ATTRIBUTE = /(?:\bsrc|\bhref)="([^"]+)"/g;
+const RESSOURCEN_ATTRIBUTE = /(?:\bsrc|\bhref)="([^"]+)"/gi;
 /** Nur <link>-Typen, die tatsächlich eine Ressource laden. */
 const LADENDE_LINKS =
-	/<link\b[^>]*\brel="(?:stylesheet|preload|modulepreload|prefetch|icon|shortcut icon|apple-touch-icon|manifest)"[^>]*>/g;
+	/<link\b[^>]*\brel="(?:stylesheet|preload|modulepreload|prefetch|icon|shortcut icon|apple-touch-icon|manifest)"[^>]*>/gi;
 
 const pflichtHeader = {
 	"strict-transport-security":
@@ -80,9 +80,9 @@ for (const pfad of pfade) {
 
 	const gedeckt = new Set(csp.match(/'sha256-[^']+'/g) ?? []);
 	const inline =
-		html.match(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g) ?? [];
+		html.match(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script\s*>/gi) ?? [];
 	for (const block of inline) {
-		const inhalt = block.replace(/^<script[^>]*>/, "").replace(/<\/script>$/, "");
+		const inhalt = block.replace(/^<script\b[^>]*>/i, "").replace(/<\/script\s*>$/i, "");
 		if (!gedeckt.has(hashe(inhalt)))
 			meldung(pfad, "Inline-Skript ist nicht per Hash gedeckt");
 	}
@@ -90,9 +90,9 @@ for (const pfad of pfade) {
 	// Ressourcenverweise: <script src>, <link href>, <img src>. Reine
 	// Textlinks (<a href>) dürfen selbstverständlich nach außen zeigen.
 	const ressourcen = [
-		...(html.match(/<script\b[^>]*\bsrc="([^"]+)"/g) ?? []),
+		...(html.match(/<script\b[^>]*\bsrc="([^"]+)"/gi) ?? []),
 		...(html.match(LADENDE_LINKS) ?? []),
-		...(html.match(/<img\b[^>]*\bsrc="([^"]+)"/g) ?? []),
+		...(html.match(/<img\b[^>]*\bsrc="([^"]+)"/gi) ?? []),
 	];
 	for (const treffer of ressourcen) {
 		for (const [, wert] of treffer.matchAll(RESSOURCEN_ATTRIBUTE)) {

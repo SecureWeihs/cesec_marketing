@@ -97,6 +97,10 @@ jobs:
           }
           node scripts/pruefe-header.mjs http://127.0.0.1:3000 $SEITEN
           node scripts/pruefe-barrierefreiheit.mjs http://127.0.0.1:3000 $SEITEN
+          node scripts/pruefe-abnahme.mjs http://127.0.0.1:3000
+
+      - name: Monatsbericht erzeugt einen Beispielbericht
+        run: node scripts/analytics-report.ts --beispiel
 
   geheimnisse:
     name: Suche nach Zugangsdaten im Verlauf
@@ -147,3 +151,61 @@ jobs:
             --metrics off \
             --exclude node_modules \
             --exclude .next
+
+  lighthouse:
+    # Nur Bericht, keine Sperre: Gemessen wird gegen den lokalen Server in der
+    # CI, ohne CDN und ohne HTTP/2. Die verbindliche Messung für die Abnahme
+    # (Kriterium 1) findet am Produktions-Deployment statt. Die Zahlen hier
+    # zeigen Trends und liefern die Grundlage für die Entscheidung W2.
+    name: Lighthouse (Bericht)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Quellcode holen
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Node einrichten
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Abhängigkeiten installieren und bauen
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+
+      - name: Drei Seiten messen (mobil)
+        env:
+          npm_config_ignore_scripts: "true"
+        run: |
+          npx next start -p 3000 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://127.0.0.1:3000/ && break; sleep 0.5; done
+          mkdir -p lighthouse
+          for pfad in / /nis2-nisg-2026 /nis2-nisg-2026/fristen-und-registrierung; do
+            name=$(echo "$pfad" | tr '/' '_' | sed 's/^_$/start/; s/^_//')
+            npx --yes lighthouse@13.4.1 "http://127.0.0.1:3000$pfad" \
+              --only-categories=performance,accessibility,best-practices,seo \
+              --chrome-flags="--headless=new --no-sandbox" \
+              --output=json --output=html --output-path="lighthouse/$name" --quiet || true
+          done
+          node -e '
+            const fs=require("fs");
+            const zeilen=["| Seite | Performance | Barrierefreiheit | Best Practices | SEO |","|---|---:|---:|---:|---:|"];
+            for (const f of fs.readdirSync("lighthouse").filter(f=>f.endsWith(".report.json"))) {
+              const r=JSON.parse(fs.readFileSync("lighthouse/"+f,"utf8")); const c=r.categories;
+              const w=k=>Math.round((c[k]?.score??0)*100);
+              zeilen.push(`| ${new URL(r.finalDisplayedUrl).pathname} | ${w("performance")} | ${w("accessibility")} | ${w("best-practices")} | ${w("seo")} |`);
+            }
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## Lighthouse (lokal in der CI, mobil)\n\n"+zeilen.join("\n")+"\n");
+            console.log(zeilen.join("\n"));'
+
+      - name: Berichte ablegen
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: lighthouse
+          path: lighthouse/
+          retention-days: 30

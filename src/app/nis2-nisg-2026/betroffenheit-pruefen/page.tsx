@@ -8,7 +8,7 @@ import { Verweis } from "@/components/verweis";
 export const metadata: Metadata = {
 	title: "NISG 2026: Betroffenheit prüfen in fünf Schritten",
 	description:
-		"Selbstcheck zum NISG 2026: wesentliche oder wichtige Einrichtung, nicht erfasst oder Einzelfall. Läuft nur in Ihrem Browser, ohne Anmeldung, jede Regel mit Fundstelle.",
+		"Selbstcheck zum NISG 2026: wesentliche oder wichtige Einrichtung, nicht erfasst oder Einzelfall. Nur in Ihrem Browser, ohne Anmeldung, jede Regel belegt.",
 	openGraph: { images: [{ url: "/og/leistung.png", width: 1200, height: 630 }] },
 };
 

@@ -8,7 +8,7 @@ import { StrukturierteDaten } from "@/components/strukturierte-daten";
 export const metadata: Metadata = {
 	title: "Security Services: CISO as a Service, Audits, BCM",
 	description:
-		"Externer Informationssicherheitsbeauftragter, interne Audits und Lieferantenaudits, IKT-Risikomanagement, BCM, Vorfallmanagement und Automatisierung von Kontrollen.",
+		"CISO as a Service, interne Audits und Lieferantenaudits, IKT-Risikomanagement, BCM, Vorfallmanagement und Meldepflichten sowie Automatisierung von Kontrollen.",
 	openGraph: { images: [{ url: "/og/leistung.png", width: 1200, height: 630 }] },
 };
 

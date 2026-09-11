@@ -1,0 +1,58 @@
+# Laufende Prüfung nach Abschnitt 14.6 des Briefs: nach jedem erfolgreichen
+# Produktions-Deployment gegen die echte Domain. Vercel meldet Deployments
+# über die GitHub-Deployment-API; diese Prüfung hängt sich daran.
+
+name: Produktion prüfen
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  produktion:
+    name: Produktion gegen die Vorgaben prüfen
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      ZIEL: https://cesec.at
+    steps:
+      - name: Quellcode holen
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Node einrichten
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci --ignore-scripts
+
+      - name: Zertifikat gültig und nicht kurz vor Ablauf
+        run: |
+          echo | openssl s_client -servername cesec.at -connect cesec.at:443 2>/dev/null \
+            | openssl x509 -noout -checkend 1209600 \
+            || { echo "Zertifikat ungültig oder läuft in weniger als 14 Tagen ab."; exit 1; }
+
+      - name: www leitet dauerhaft auf den kanonischen Host
+        run: |
+          antwort=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://www.cesec.at/)
+          echo "$antwort"
+          case "$antwort" in 301\ https://cesec.at/*|308\ https://cesec.at/*) ;; *) exit 1 ;; esac
+
+      - name: Header, CSP und Fremd-Hosts auf allen Seiten der Sitemap
+        run: |
+          SEITEN=$(curl -s "$ZIEL/sitemap.xml" | grep -o '<loc>[^<]*</loc>' | sed 's#<loc>https://cesec.at##; s#</loc>##; s#^$#/#')
+          node scripts/pruefe-header.mjs "$ZIEL" $SEITEN
+
+      - name: Abnahmekriterien
+        run: node scripts/pruefe-abnahme.mjs "$ZIEL"

@@ -3,9 +3,9 @@ import { site } from "@/lib/site";
 import { Textseite } from "@/components/seite";
 
 export const metadata: Metadata = {
-	title: "Barrierefreiheit",
+	title: "Erklärung zur Barrierefreiheit der Website cesec.at",
 	description:
-		"Stand der Barrierefreiheit dieser Website, geprüfte Punkte, bekannte Einschränkungen und wie Sie Barrieren melden können.",
+		"Stand der Barrierefreiheit dieser Website nach WCAG 2.1 AA: umgesetzte und geprüfte Punkte, bekannte Einschränkungen und wie Sie eine Barriere melden können.",
 	openGraph: { images: [{ url: "/og/standard.png", width: 1200, height: 630 }] },
 };
 

@@ -19,7 +19,10 @@ import { join, relative, sep } from "node:path";
 
 const HTML_WURZEL = ".next/server/app";
 const ZIEL = "src/generated/csp-hashes.json";
-const INLINE_SKRIPT = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g;
+// Groß-/Kleinschreibung und Leerraum im schließenden Tag spielen für den
+// Browser keine Rolle, also auch nicht für diese Erkennung. Derselbe Ausdruck
+// steht in scripts/pruefe-header.mjs.
+const INLINE_SKRIPT = /<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script\s*>/gi;
 
 async function htmlDateien(verzeichnis) {
 	const gefunden = [];
