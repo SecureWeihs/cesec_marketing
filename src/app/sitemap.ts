@@ -8,6 +8,10 @@ import { site } from "@/lib/site";
  */
 const SEITEN = [
 	{ pfad: "/", prioritaet: 1 },
+	{ pfad: "/nis2-nisg-2026", prioritaet: 1 },
+	{ pfad: "/iso-27001", prioritaet: 0.9 },
+	{ pfad: "/security-services", prioritaet: 0.8 },
+	{ pfad: "/referenzen", prioritaet: 0.6 },
 	{ pfad: "/about", prioritaet: 0.8 },
 	{ pfad: "/kontakt", prioritaet: 0.7 },
 	{ pfad: "/impressum", prioritaet: 0.3 },

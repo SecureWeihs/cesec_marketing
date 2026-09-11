@@ -1,47 +1,76 @@
 {
 	"/_global-error": [
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-jsZE/OQ3iLRRe4Y2aOJwO7bNTY432AYxmVSLeI+IYXM='"
+		"'sha256-yREfVZGSlIXGeH9NVQrBkWAsRkTvipdaFbaAQObn0MI='"
 	],
 	"/_not-found": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-ijFbwj09CqDamjLAKgjtgdyo4RpO5eB22Hf3MlIhzb4='"
+		"'sha256-ivfZBXRE5x+uNw4U+LWidKNj1uFz/SBPfje7vE/q5RQ='"
 	],
 	"/about": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-TLRsZ+G8ldxDOiwW1l7wGKtdpabLXijkAejzhpyaPIs='",
 		"'sha256-X624AxXOQ52Qd++IRLw1EQsrP5YaYj6L6bccahVYeq0='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-0ugMnhK/NUW6iArMBN7uCBIBKND+1ZLtNVHD8LSfwLs='"
+		"'sha256-rNe91kXXSjeWJ+kJoPK0l/vCtDUoBBitAFT9b1m0cdU='"
 	],
 	"/barrierefreiheit": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-tcMxV0q8WFVz55rlYggLrXhT/uHMoN/pwPFJ+AYFkbo='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-KKGPrZ10CS6I0zHobyjxRSXjqLDysBmtUdY/F427Tys='"
+		"'sha256-b5P5BYM3vaXjfxpGcNxZzzhTXkbIPTsR7xdTw+Upw+c='"
 	],
 	"/datenschutz": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-LcgdyZcrZGv35GPf9ZR82LpgfSvN5YUtAU2egMXCEWs='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-Tb/yLPy3UJES1Tym3vMngwjKe4mYW5nN6mpxMZQddns='"
+		"'sha256-KTEsF7uRQ6GQ0aKOgHhPVGqbMHR26edrwOGbeX65zNM='"
 	],
 	"/impressum": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-wHef6Nn+vhmxIRjozWxj6HAqCisqg4h9tfGM1IRwyNo='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-C+s0BLxVqnfRQnq6e4YJVH+ofwE5nA3XQ5GGaXSSPTs='"
+		"'sha256-NWt0QcpXDKLwmfKKeM5lL0icNd6xSK5LdbNNVkVm1CU='"
 	],
 	"/": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-G8lVSzCIYy8lzj7kPOj8oGl8+8IsCy7j/4tRMVD3Lds='"
+		"'sha256-oY2YiLYDKphlraEj458hDt6OV0ieULh4P8uyMAzan8E='"
+	],
+	"/iso-27001": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-U4LT/uXkJVVoDc3k8YWPIKV3RcFlgO4s65ZG5HAPLN0='",
+		"'sha256-xeJ/W8RTz/NyH4Go+/+B0bd3bIfioms6lAs5E9gxUEI='",
+		"'sha256-1slBPauDA56p0QTjRD7Dp1cQim7clAMa0Oe+EZacE/Y='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-agXDUXVOUsL1+R3KZnlooXpkd/u0NbS1yN7S+uExCI4='"
 	],
 	"/kontakt": [
 		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
 		"'sha256-yPEbLt4A1tzD6p9Xw1xHi++k1uZmexcn9TVfIuoBH7Q='",
 		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
-		"'sha256-3SfQJFSTNc/5UoL3ic3lmC/Aa6v5Eyie1VuKvxAwK0o='"
+		"'sha256-dqmSDV4TmEMftY0gBjDMLazDOJnHi0CF/Hs/42bB/e0='"
+	],
+	"/nis2-nisg-2026": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-l2cmxrrp1Xj99itHNBUhu3KEnXhHDQLGuJ8FpkBGPgo='",
+		"'sha256-VBS11JeYjp9Idc6UXBpAk6YwBOVXLd9DqZK4i7LS3v0='",
+		"'sha256-DPoXiMaysvVCzwjg4tLUBVUT5NAyTR9TTGR/q9DXPfQ='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-ToBRGYnczSKckSXFa43STjma0DnzVCsXFibRsTUD5d4='"
+	],
+	"/referenzen": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-wWz3SuEOpPG4NXgVCAeUC6ZvLC8Eel8XgAcTrgUzHNE='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-GEeXuv7XWz+kLddxmMVjhK7BtsGMbmCdL/nZzx50AVk='"
+	],
+	"/security-services": [
+		"'sha256-C462a7YqGOBO2y1GshJNtJF3jFSty3k88bCey1CS9eM='",
+		"'sha256-dvswZNErhnVR5Q2CBHQzjcwDTaQRp+7nO3wp64Omv7U='",
+		"'sha256-GF1dg4fbAySNXaUc/eHpDUglshVsKTs52bIYzzujU3w='",
+		"'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='",
+		"'sha256-5cMapUx2t/+w3aALw2xGubdxVfFXFFiDw4TSvlLbyEc='"
 	]
 }

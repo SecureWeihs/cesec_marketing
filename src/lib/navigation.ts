@@ -8,10 +8,10 @@
  */
 export const hauptnavigation = [
 	{ pfad: "/", titel: "Home", verfuegbar: true },
-	{ pfad: "/nis2-nisg-2026", titel: "NIS2 & NISG 2026", verfuegbar: false },
-	{ pfad: "/iso-27001", titel: "ISO 27001", verfuegbar: false },
-	{ pfad: "/security-services", titel: "Security Services", verfuegbar: false },
-	{ pfad: "/referenzen", titel: "Referenzen", verfuegbar: false },
+	{ pfad: "/nis2-nisg-2026", titel: "NIS2 & NISG 2026", verfuegbar: true },
+	{ pfad: "/iso-27001", titel: "ISO 27001", verfuegbar: true },
+	{ pfad: "/security-services", titel: "Security Services", verfuegbar: true },
+	{ pfad: "/referenzen", titel: "Referenzen", verfuegbar: true },
 	{ pfad: "/about", titel: "About", verfuegbar: true },
 	{ pfad: "/kontakt", titel: "Kontakt", verfuegbar: true },
 ] as const;
