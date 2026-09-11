@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { hauptnavigation, site } from "@/lib/site";
+import { hauptnavigation } from "@/lib/navigation";
+import { site } from "@/lib/site";
 import { Logo } from "@/components/logo";
 
 /**
@@ -14,7 +15,7 @@ export function Kopfzeile() {
 					className="flex items-center gap-2.5 text-tinte no-underline"
 					aria-label="Cesec, zur Startseite"
 				>
-					<Logo klasse="h-7 w-auto text-signal" titel="" />
+					<Logo klasse="h-7 w-auto text-signal" dekorativ />
 					<span className="font-serif text-xl font-semibold tracking-tight">
 						Cesec
 					</span>
@@ -23,7 +24,7 @@ export function Kopfzeile() {
 				<nav aria-label="Hauptnavigation" className="order-3 w-full sm:order-2 sm:w-auto">
 					<ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
 						{hauptnavigation
-							.filter((eintrag) => eintrag.pfad !== "/")
+							.filter((eintrag) => eintrag.pfad !== "/" && eintrag.verfuegbar)
 							.map((eintrag) => (
 								<li key={eintrag.pfad}>
 									<Link

@@ -1,11 +1,6 @@
 import Link from "next/link";
+import { rechtliches } from "@/lib/navigation";
 import { site } from "@/lib/site";
-
-const rechtliches = [
-	{ pfad: "/impressum", titel: "Impressum" },
-	{ pfad: "/datenschutz", titel: "Datenschutz" },
-	{ pfad: "/barrierefreiheit", titel: "Barrierefreiheit" },
-] as const;
 
 export function Fusszeile() {
 	return (
@@ -50,7 +45,7 @@ export function Fusszeile() {
 				<div>
 					<p className="font-medium">Rechtliches</p>
 					<ul className="mt-2 space-y-1">
-						{rechtliches.map((eintrag) => (
+						{rechtliches.filter((eintrag) => eintrag.verfuegbar).map((eintrag) => (
 							<li key={eintrag.pfad}>
 								<Link href={eintrag.pfad} className="text-signal">
 									{eintrag.titel}

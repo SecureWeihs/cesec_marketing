@@ -37,8 +37,11 @@ jobs:
           node-version: 24
           cache: npm
 
+      # --ignore-scripts: kein Paket im Baum darf beim Installieren Code
+      # ausführen. Geprüft, dass Lint, Typen, Build und alle Prüfungen ohne
+      # Installationsskripte durchlaufen.
       - name: Abhängigkeiten aus dem Lockfile installieren
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Lint
         run: npm run lint
@@ -65,14 +68,25 @@ jobs:
           path: sbom.cdx.json
           retention-days: 90
 
-      - name: Server starten und Header prüfen
+      # Server und Prüfungen in einem Schritt: ein zwischen zwei Schritten
+      # weiterlaufender Hintergrundprozess ist kein verlässlicher Zustand.
+      - name: Ausgelieferte Seiten prüfen
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          SEITEN: / /impressum /datenschutz /barrierefreiheit
         run: |
           npx next start -p 3000 &
-          for i in $(seq 1 40); do
+          server=$!
+          trap 'kill $server 2>/dev/null || true' EXIT
+          for i in $(seq 1 60); do
             curl -sf -o /dev/null http://127.0.0.1:3000/ && break
             sleep 0.5
           done
-          node scripts/pruefe-header.mjs http://127.0.0.1:3000 /
+          curl -sf -o /dev/null http://127.0.0.1:3000/ || {
+            echo "Server ist nicht hochgekommen."; exit 1;
+          }
+          node scripts/pruefe-header.mjs http://127.0.0.1:3000 $SEITEN
+          node scripts/pruefe-barrierefreiheit.mjs http://127.0.0.1:3000 $SEITEN
 
   geheimnisse:
     name: Suche nach Zugangsdaten im Verlauf

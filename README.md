@@ -14,9 +14,13 @@ Keine UI-Bibliothek, kein CMS, keine Datenbank, keine Drittanbieter-Skripte.
 ## Entwickeln
 
 ```bash
-npm ci
+npm ci --ignore-scripts
 npm run dev      # http://localhost:3000
 ```
+
+`--ignore-scripts` ist Absicht: kein Paket soll beim Installieren Code
+ausführen dürfen. Lint, Typen, Build und sämtliche Prüfungen laufen ohne
+Installationsskripte durch, die CI installiert genauso.
 
 | Befehl | Wirkung |
 |---|---|
@@ -24,6 +28,9 @@ npm run dev      # http://localhost:3000
 | `npm run typecheck` | TypeScript ohne Ausgabe |
 | `npm run lint` | ESLint |
 | `npm run pruefe:header` | prüft eine laufende Instanz gegen die Sicherheitsvorgaben |
+| `npm run pruefe:a11y` | axe-core gegen WCAG 2.1 AA, zusätzlich Konsolenfehler |
+| `npm run pruefe:bilder` | scheitert bei Metadaten in ausgelieferten Bildern |
+| `npm run nap` | schreibt `NAP.md` aus den Stammdaten |
 
 Einmalig nach dem Klonen, damit kein Versehen direkt auf `main` landet:
 
@@ -56,6 +63,23 @@ die Hashes hängen an der Build-ID und damit am Commit, der sie enthält — die
 Datei kann sich also gar nicht selbst enthalten. Verbindlich ist immer das
 Ergebnis von `npm run build`, und Schritt 4 bricht ab, falls es nicht passt.
 `next build` allein genügt deshalb nie für ein Deployment.
+
+## Stammdaten
+
+`content/impressum.yaml` ist die einzige Quelle für Firmenwortlaut, Anschrift,
+Telefonnummer, Register- und Gewerbeangaben. Daraus entstehen das Impressum,
+`NAP.md` und die strukturierten Daten — nichts davon wird an zweiter Stelle
+gepflegt. Die Datei wird beim Bauen mit Zod geprüft; eine fehlerhafte
+Postleitzahl oder eine UID im falschen Format bricht den Build ab.
+
+```bash
+npm run nap    # schreibt NAP.md neu
+npm run build  # prüft unter anderem, dass NAP.md zu den Stammdaten passt
+```
+
+Noch nicht gelieferte Angaben stehen als `null` in der YAML-Datei. Sie
+erscheinen dann nirgends auf der Website — kein Platzhalter, keine erfundene
+Zahl — und der Build weist einmal je Lauf darauf hin.
 
 ## Bilder und Symbole
 
