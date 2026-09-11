@@ -42,6 +42,16 @@ if (!chrome) {
 	process.exit(0);
 }
 
+// Erst prüfen, ob überhaupt jemand antwortet: ein stehender Browser, der in
+// einen Zeitüberlauf läuft, sagt nichts darüber aus, was kaputt ist.
+const probe = await fetch(`${basis}/`).catch((ursache) => ursache);
+if (!(probe instanceof Response) || !probe.ok) {
+	console.error(
+		`Barrierefreiheitsprüfung: ${basis} antwortet nicht (${probe instanceof Response ? probe.status : probe.message}).`,
+	);
+	process.exit(1);
+}
+
 const browser = await puppeteer.launch({
 	executablePath: chrome,
 	args: ["--no-sandbox", "--disable-dev-shm-usage"],
@@ -58,8 +68,12 @@ try {
 		});
 		seite.on("pageerror", (fehler) => konsole.push(String(fehler)));
 
+		// "load" statt "networkidle0": Netzruhe abzuwarten hängt sich in
+		// Bauumgebungen an offenen Verbindungen auf, und für axe genügt ein
+		// fertig geladenes Dokument.
 		const antwort = await seite.goto(`${basis}${pfad}`, {
-			waitUntil: "networkidle0",
+			waitUntil: "load",
+			timeout: 20000,
 		});
 		if (!antwort || !antwort.ok()) {
 			console.error(`  ✗ ${pfad}: Status ${antwort?.status() ?? "keine Antwort"}`);
