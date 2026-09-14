@@ -37,15 +37,34 @@ jobs:
       - name: Abhängigkeiten installieren
         run: npm ci --ignore-scripts
 
+      # Der Abruf braucht ein Zeitlimit und stdin aus /dev/null: Ohne beides
+      # kann s_client auf einem Runner hängen bleiben, statt zu antworten.
+      # Kurz nach einem Deployment ist das Zertifikat außerdem manchmal noch
+      # nicht ausgeliefert, deshalb bis zu fünf Versuche.
       - name: Zertifikat gültig und nicht kurz vor Ablauf
         run: |
-          echo | openssl s_client -servername cesec.at -connect cesec.at:443 2>/dev/null \
-            | openssl x509 -noout -checkend 1209600 \
-            || { echo "Zertifikat ungültig oder läuft in weniger als 14 Tagen ab."; exit 1; }
+          for versuch in 1 2 3 4 5; do
+            if timeout 20 openssl s_client -servername cesec.at -connect cesec.at:443 \
+                 </dev/null 2>/dev/null | openssl x509 -noout -checkend 1209600; then
+              echo "Zertifikat gültig und mindestens 14 Tage haltbar."
+              exit 0
+            fi
+            echo "Versuch $versuch: kein verwertbares Zertifikat erhalten."
+            sleep 10
+          done
+          echo "Zertifikat ungültig, nicht erreichbar oder läuft in weniger als 14 Tagen ab."
+          exit 1
 
+      # Prüft zusätzlich, dass das Zertifikat www abdeckt: Ohne die Domain im
+      # Vercel-Projekt zeigt der DNS-Eintrag zwar hin, der Handshake scheitert
+      # aber mit einer Zertifikatswarnung — für Besucher schlimmer als gar kein
+      # www.
       - name: www leitet dauerhaft auf den kanonischen Host
         run: |
-          antwort=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://www.cesec.at/)
+          antwort=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' --max-time 20 https://www.cesec.at/) || {
+            echo "https://www.cesec.at ist nicht erreichbar — fehlt die Domain im Vercel-Projekt?"
+            exit 1
+          }
           echo "$antwort"
           case "$antwort" in 301\ https://cesec.at/*|308\ https://cesec.at/*) ;; *) exit 1 ;; esac
 
