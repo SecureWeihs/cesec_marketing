@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 	title: "Referenzen: Projekte ohne Namen, Belege mit Namen",
 	description:
 		"Warum hier keine Kundennamen stehen, vier anonymisierte Projektsteckbriefe und die Nachweise, die sich ohne Kundenfreigabe überprüfen lassen.",
+	alternates: { canonical: "/referenzen" },
 	openGraph: { images: [{ url: "/og/leistung.png", width: 1200, height: 630 }] },
 };
 

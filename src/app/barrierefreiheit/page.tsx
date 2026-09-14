@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 	title: "Erklärung zur Barrierefreiheit der Website cesec.at",
 	description:
 		"Stand der Barrierefreiheit dieser Website nach WCAG 2.1 AA: umgesetzte und geprüfte Punkte, bekannte Einschränkungen und wie Sie eine Barriere melden können.",
+	alternates: { canonical: "/barrierefreiheit" },
 	openGraph: { images: [{ url: "/og/standard.png", width: 1200, height: 630 }] },
 };
 

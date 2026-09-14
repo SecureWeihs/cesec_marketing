@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 	title: "NIS2 Beratung Österreich: NISG 2026 umsetzen",
 	description:
 		"Wer unter das NISG 2026 fällt, welche Pflichten und Fristen gelten und wie die Umsetzung abläuft — jede Aussage mit Fundstelle im Gesetzestext belegt.",
+	alternates: { canonical: "/nis2-nisg-2026" },
 	openGraph: { images: [{ url: "/og/leistung.png", width: 1200, height: 630 }] },
 };
 

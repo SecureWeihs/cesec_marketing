@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 	title: "NISG 2026: Betroffenheit prüfen in fünf Schritten",
 	description:
 		"Selbstcheck zum NISG 2026: wesentliche oder wichtige Einrichtung, nicht erfasst oder Einzelfall. Nur in Ihrem Browser, ohne Anmeldung, jede Regel belegt.",
+	alternates: { canonical: "/nis2-nisg-2026/betroffenheit-pruefen" },
 	openGraph: { images: [{ url: "/og/leistung.png", width: 1200, height: 630 }] },
 };
 
