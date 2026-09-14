@@ -22,7 +22,7 @@ const FAKTEN = [
 	"Von der CIS für ISO/IEC 27001 berufen",
 	"Zuletzt Informationssicherheitsbeauftragter einer österreichischen Landesbank",
 	"Begleitung einer sechs Monate laufenden Prüfung der Österreichischen Nationalbank",
-	"Wien, Niederösterreich und Umland, überwiegend remote",
+	"Einsatzraum Wien, Niederösterreich und Umland",
 ] as const;
 
 const LEISTUNGEN = [

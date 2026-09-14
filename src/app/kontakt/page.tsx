@@ -47,7 +47,7 @@ export default function KontaktSeite() {
 					{anschrift.land}
 				</dd>
 				<dt>Einsatzraum</dt>
-				<dd>Wien, Niederösterreich und Umland, überwiegend remote möglich</dd>
+				<dd>Wien, Niederösterreich und Umland</dd>
 			</dl>
 
 			<h2>Für das erste Gespräch</h2>
@@ -59,13 +59,6 @@ export default function KontaktSeite() {
 					Fragebogen eines Kunden oder eine anstehende Prüfung
 				</li>
 				<li>bis wann etwas stehen muss</li>
-			</ul>
-			<h2>Warum es kein Kontaktformular gibt</h2>
-			<p>
-				Ein Formular wäre ein zusätzlicher Weg, auf dem Daten verarbeitet und
-				gespeichert werden, und bräuchte einen Spam-Schutz. Telefon und E-Mail
-				erreichen mich ohne diesen Umweg.
-			</p>
-		</Textseite>
+			</ul>		</Textseite>
 	);
 }

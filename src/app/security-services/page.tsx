@@ -137,8 +137,8 @@ export default function SecurityServicesSeite() {
 					<p className="mt-4">
 						Sie brauchen kurzfristig Verstärkung in einem NIS2-, ISO-27001-
 						oder DORA-Projekt? Ich arbeite auch als Subauftragnehmer, bis zu
-						vier Tage pro Woche, in Wien, Niederösterreich und Umland,
-						überwiegend remote. Einsatzgebiete: Rolle des
+						vier Tage pro Woche, in Wien, Niederösterreich und Umland.
+						Einsatzgebiete: Rolle des
 						Informationssicherheitsbeauftragten, interne Audits und
 						Lieferantenaudits, IKT-Risikomanagement, Business Continuity,
 						Automatisierung von Kontrollen.
