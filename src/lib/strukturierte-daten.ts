@@ -40,6 +40,7 @@ export function unternehmen(): Knoten {
 		email: site.email,
 		telephone: site.telefon.e164,
 		address: postanschrift(),
+		foundingDate: impressum.gruendung,
 		founder: { "@id": `${site.url}/about#person` },
 		areaServed: ["Wien", "Niederösterreich", "Österreich"].map((name) => ({
 			"@type": "AdministrativeArea",
