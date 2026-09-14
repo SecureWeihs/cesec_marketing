@@ -152,7 +152,7 @@ export default function UeberMichSeite() {
 					<dt>Kapazität</dt>
 					<dd>bis zu vier Tage pro Woche</dd>
 					<dt>Einsatzraum</dt>
-					<dd>Wien, Niederösterreich und Umland, überwiegend remote möglich</dd>
+					<dd>Wien, Niederösterreich und Umland</dd>
 					<dt>Sprachen</dt>
 					<dd>Deutsch (Muttersprache), Englisch (C1)</dd>
 				</dl>
