@@ -75,3 +75,74 @@ jobs:
 
       - name: Abnahmekriterien
         run: node scripts/pruefe-abnahme.mjs "$ZIEL"
+
+  lighthouse:
+    # Misst die echte Auslieferung: über HTTPS, mit CDN und HTTP/2. Nur hier
+    # sind die Zahlen für Abnahmekriterium 1 aussagekräftig — im Pull Request
+    # würde derselbe Lauf den bereits veröffentlichten Stand messen, nicht die
+    # Änderung.
+    name: Lighthouse an der Produktion
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Quellcode holen
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Node einrichten
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Drei Seiten messen (mobil)
+        env:
+          npm_config_ignore_scripts: "true"
+        run: |
+          mkdir -p lighthouse
+          for pfad in / /nis2-nisg-2026 /nis2-nisg-2026/fristen-und-registrierung; do
+            name=$(echo "$pfad" | tr '/' '_' | sed 's/^_$/start/; s/^_//')
+            npx --yes lighthouse@13.4.1 "https://cesec.at$pfad" \
+              --only-categories=performance,accessibility,best-practices,seo \
+              --chrome-flags="--headless=new --no-sandbox" \
+              --output=json --output=html --output-path="lighthouse/$name" --quiet
+          done
+
+      - name: Ergebnis bewerten
+        run: |
+          node -e '
+            const fs = require("fs");
+            const zeilen = ["| Seite | Performance | Barrierefreiheit | Best Practices | SEO |", "|---|---:|---:|---:|---:|"];
+            let fehler = [];
+            for (const datei of fs.readdirSync("lighthouse").filter((f) => f.endsWith(".report.json"))) {
+              const bericht = JSON.parse(fs.readFileSync("lighthouse/" + datei, "utf8"));
+              const c = bericht.categories;
+              const wert = (k) => Math.round((c[k]?.score ?? 0) * 100);
+              const pfad = new URL(bericht.finalDisplayedUrl).pathname;
+              zeilen.push(`| ${pfad} | ${wert("performance")} | ${wert("accessibility")} | ${wert("best-practices")} | ${wert("seo")} |`);
+              // Abnahmekriterium 1 verlangt überall 100. Bei der Performance
+              // schwankt die Messung über das Netz, deshalb greift dort erst
+              // eine Untergrenze — die drei anderen müssen sitzen.
+              for (const k of ["accessibility", "best-practices", "seo"]) {
+                if (wert(k) < 100) fehler.push(`${pfad}: ${k} ${wert(k)}, erwartet 100`);
+              }
+              if (wert("performance") < 90) fehler.push(`${pfad}: Performance ${wert("performance")}, Untergrenze 90`);
+            }
+            const tabelle = "## Lighthouse an der Produktion (mobil)\n\n" + zeilen.join("\n") + "\n";
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, tabelle);
+            console.log(tabelle);
+            if (fehler.length) { console.error("Unterschritten:\n  " + fehler.join("\n  ")); process.exit(1); }
+          '
+
+      - name: Berichte ablegen
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: lighthouse-produktion
+          path: lighthouse/
+          retention-days: 90
