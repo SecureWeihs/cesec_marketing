@@ -153,7 +153,7 @@ export default function ReferenzenSeite() {
 				</ul>
 			</Leistungsseite>
 			<div className="mx-auto max-w-5xl px-5 pb-12">
-				<Handlung text="Namen und Ansprechpartner nenne ich im Gespräch, soweit die Kunden zugestimmt haben. Den Preisrahmen ebenso — nicht nach drei Terminen." />
+				<Handlung text="Namen und Ansprechpartner nenne ich im Gespräch, soweit die Kunden zugestimmt haben." />
 			</div>
 		</>
 	);

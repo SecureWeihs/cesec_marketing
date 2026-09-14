@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
  * Primäre Konversion ist das Telefonat, sekundär die E-Mail.
  */
 export function Handlung({
-	text = "Ob und was davon auf Ihr Unternehmen zutrifft, lässt sich in einem Gespräch meist klären. Den Preisrahmen nenne ich dabei, nicht nach drei Terminen.",
+	text = "Ob und was davon auf Ihr Unternehmen zutrifft, lässt sich in einem Gespräch meist klären.",
 }: {
 	text?: string;
 }) {
