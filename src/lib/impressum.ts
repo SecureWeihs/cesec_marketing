@@ -16,6 +16,7 @@ const schema = z.object({
 	firmenwortlaut: nichtLeer,
 	inhaber: nichtLeer,
 	rechtsform: nichtLeer,
+	gruendung: z.iso.date("gruendung: Datum im Format JJJJ-MM-TT"),
 	anschrift: z.object({
 		strasse: nichtLeer,
 		plz: z.string().regex(/^\d{4}$/, "österreichische Postleitzahl, vier Ziffern"),

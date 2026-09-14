@@ -18,13 +18,14 @@ export const metadata: Metadata = {
  * Profil ab und stehen zur Freigabe:
  * - „führender österreichischer IT-Dienstleister“ ist ohne „führender“
  *   übernommen; Superlative sind in der Tonalität ausgeschlossen.
- * - TODO(inhaber): Beginn der Selbstständigkeit. Das Profil nennt als
- *   frühestes eigenes Projekt 02/2025, aber kein Gründungsdatum.
+ * - Beginn der Selbstständigkeit: Gründung der Cesec e. U. am 26.04.2023,
+ *   vom Inhaber bestätigt. Die Beratungsprojekte im Beraterprofil beginnen
+ *   später; die Anstellung bis 01/2025 lief parallel.
  */
 
 const WERDEGANG = [
 	{
-		zeitraum: "seit 02/2025",
+		zeitraum: "seit 04/2023",
 		rolle: "Berater für Informationssicherheit, Cesec e. U.",
 		umfeld:
 			"Externer Informationssicherheitsbeauftragter, ISMS-Beratung und Prozessautomatisierung für KMU und gemeinnützige Organisationen, auch als Subdienstleister in NIS2- und DORA-Projekten.",

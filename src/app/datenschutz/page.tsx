@@ -84,9 +84,21 @@ export default function DatenschutzSeite() {
 
 			<h2>3. Hosting und Server-Protokolle</h2>
 			<p>
-				Die Website wird von der Vercel Inc., 440 N Barranca Avenue #4133,
-				Covina, CA 91723, USA betrieben. Die Auslieferung erfolgt aus der
-				Region Frankfurt am Main.
+				Die Website wird bei einem spezialisierten Anbieter für Web-Hosting
+				betrieben; die Auslieferung erfolgt aus einem Rechenzentrum in
+				Frankfurt am Main. Der Anbieter hat seinen Unternehmenssitz in den
+				Vereinigten Staaten.
+			</p>
+			<p>
+				Den Namen des Anbieters und der übrigen eingesetzten Dienstleister
+				nenne ich hier nicht. Das ist berufliche Gewohnheit: Wer öffentlich
+				auflistet, womit er arbeitet, liefert einem Angreifer die
+				Vorarbeit — welche Schwachstellen interessant sind und wo ein
+				Angriff ansetzen könnte. Ich empfehle meinen Kunden dasselbe und
+				halte mich selbst daran. Wenn Sie die Angaben brauchen, etwa um Ihre
+				Rechte nach Art. 15 DSGVO wahrzunehmen oder als Teil einer eigenen
+				Lieferantenprüfung, nennen wir sie Ihnen vollständig: eine formlose
+				E-Mail genügt.
 			</p>
 			<p>
 				Beim Abruf entstehen technisch bedingt Protokolldaten, die folgende
@@ -107,7 +119,7 @@ export default function DatenschutzSeite() {
 				<dd>kurzfristig, ausschließlich beim Dienstleister</dd>
 				<dt>Drittlandübermittlung</dt>
 				<dd>
-					Vercel Inc. hat sich gegenüber dem US-Handelsministerium zur
+					Der Anbieter hat sich gegenüber dem US-Handelsministerium zur
 					Einhaltung des EU-U.S. Data Privacy Framework verpflichtet. Für die
 					Auftragsverarbeitung gelten zusätzlich die Standardvertragsklauseln.
 				</dd>
@@ -182,8 +194,8 @@ export default function DatenschutzSeite() {
 						<dd>{analyse.aufbewahrungMonate} Monate, danach werden die Daten gelöscht</dd>
 						<dt>Betrieb</dt>
 						<dd>
-							Umami-Instanz bei Vercel Inc., Region Frankfurt am Main;
-							Datenbank bei {analyse.datenbank.anbieter}, Region{" "}
+							Eigene Instanz beim Hosting-Anbieter dieser Website, Region
+							Frankfurt am Main; Datenbank in der Region{" "}
 							{analyse.datenbank.region}
 						</dd>
 					</dl>
@@ -201,17 +213,17 @@ export default function DatenschutzSeite() {
 				</thead>
 				<tbody>
 					<tr>
-						<td>Vercel Inc., USA</td>
-						<td>Hosting und Auslieferung der Website</td>
+						<td>Anbieter für Web-Hosting</td>
+						<td>Betrieb und Auslieferung der Website</td>
 						<td>Frankfurt am Main, Unternehmenssitz USA</td>
 					</tr>
 				</tbody>
 			</table>
 			<p>
-				Für den E-Mail-Verkehr wird ein Postfach betrieben; der Anbieter wird
-				hier ergänzt, sobald die Angaben vollständig vorliegen. Weitere
-				Auftragsverarbeiter werden für den Betrieb dieser Website nicht
-				eingesetzt.
+				Für den E-Mail-Verkehr wird ein Postfach bei einem Anbieter für
+				E-Mail-Dienste betrieben. Weitere Auftragsverarbeiter werden für den
+				Betrieb dieser Website nicht eingesetzt. Namen und Sitz aller
+				Auftragsverarbeiter nenne ich Ihnen auf Anfrage.
 			</p>
 
 			<h2>{analyse.aktiv ? "8" : "7"}. Speicherdauer</h2>

@@ -32,6 +32,9 @@ unternehmensgegenstand: >-
   der Anforderungen des NISG 2026 und Wahrnehmung der Rolle des externen
   Informationssicherheitsbeauftragten.
 
+# Gründung des Einzelunternehmens.
+gruendung: "2023-04-26"
+
 firmenbuch:
   nummer: FN 603544s
   gericht: Landesgericht St. Pölten
@@ -45,9 +48,7 @@ gewerbe:
     Unternehmensberatung einschließlich der Unternehmensorganisation gemäß
     § 94 Z 74 GewO 1994, eingeschränkt auf Unternehmensorganisation und
     Technik/Technologie
-  # TODO(inhaber): GISA-Zahl aus dem Gewerberegisterauszug nachtragen.
-  # Solange sie fehlt, bleibt die Zeile im Impressum aus und der Build warnt.
-  gisaZahl: null
+  gisaZahl: "36016051"
   behoerde: Gemeindeamt Neustift-Innermanzing
   rechtsvorschrift: Gewerbeordnung 1994 (GewO 1994)
   rechtsvorschriftUrl: https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10007517
