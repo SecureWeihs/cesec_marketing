@@ -60,10 +60,6 @@ export default function KontaktSeite() {
 				</li>
 				<li>bis wann etwas stehen muss</li>
 			</ul>
-			<p>
-				Den Preisrahmen nenne ich im Erstgespräch, nicht nach drei Terminen.
-			</p>
-
 			<h2>Warum es kein Kontaktformular gibt</h2>
 			<p>
 				Ein Formular wäre ein zusätzlicher Weg, auf dem Daten verarbeitet und
