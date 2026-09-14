@@ -11,7 +11,8 @@ export function Autorenkasten() {
 				breite={160}
 				hoehe={160}
 				alt="Porträt von Sascha Weihs."
-				klasse="h-24 w-24 shrink-0 border border-linie sm:h-28 sm:w-28"
+				rahmenKlasse="shrink-0"
+				klasse="h-24 w-24 border border-linie object-cover sm:h-28 sm:w-28"
 			/>
 			<div>
 				<p className="font-serif text-lg font-semibold">Dipl.-Ing. Sascha Weihs</p>

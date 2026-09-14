@@ -9,11 +9,18 @@ export function Leistungsseite({
 	titel,
 	einleitung,
 	stufen,
+	vorInhalt,
 	children,
 }: {
 	titel: string;
 	einleitung: string;
 	stufen: readonly { titel: string; pfad: string }[];
+	/**
+	 * Interaktive Bausteine gehören nicht in den Fließtext: Dessen Regeln
+	 * färben jeden Verweis in die Signalfarbe und würden zum Beispiel die
+	 * Beschriftung einer Schaltfläche unsichtbar machen.
+	 */
+	vorInhalt?: React.ReactNode;
 	children: React.ReactNode;
 }) {
 	return (
@@ -21,6 +28,7 @@ export function Leistungsseite({
 			<Brotkrumen stufen={stufen} />
 			<h1 className="max-w-[26ch] text-3xl leading-tight sm:text-4xl">{titel}</h1>
 			<p className="mt-6 max-w-satz text-lg text-stahl">{einleitung}</p>
+			{vorInhalt}
 			<div className="fliesstext mt-10">{children}</div>
 		</article>
 	);

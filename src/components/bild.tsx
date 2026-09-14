@@ -14,6 +14,7 @@ export function Bild({
 	alt,
 	vorrang = false,
 	klasse,
+	rahmenKlasse,
 }: {
 	/** Dateiname unter public/bilder, ohne Endung und ohne @2x. */
 	name: string;
@@ -24,10 +25,16 @@ export function Bild({
 	/** Nur für das größte Bild im ersten Bildschirm. */
 	vorrang?: boolean;
 	klasse?: string;
+	/**
+	 * Klassen für das umgebende <picture>. In einem Flex-Bereich braucht es
+	 * hier „shrink-0“: Schrumpft das <picture>, zieht max-width das Bild
+	 * schmaler, während eine feste Höhe stehen bleibt — das Bild verzerrt.
+	 */
+	rahmenKlasse?: string;
 }) {
 	const pfad = `/bilder/${name}`;
 	return (
-		<picture>
+		<picture className={rahmenKlasse}>
 			<source
 				type="image/avif"
 				srcSet={`${pfad}.avif 1x, ${pfad}@2x.avif 2x`}

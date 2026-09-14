@@ -27,6 +27,9 @@ export default function BetroffenheitSeite() {
 				{ titel: "NIS2 & NISG 2026", pfad: "/nis2-nisg-2026" },
 				{ titel: "Betroffenheit prüfen", pfad: "/nis2-nisg-2026/betroffenheit-pruefen" },
 			]}
+			vorInhalt={
+				<Selbstcheck telefon={site.telefon.anzeige} telefonE164={site.telefon.e164} />
+			}
 		>
 			<p className="border-l-2 border-signal pl-4">
 				<strong>Ihre Eingaben verlassen Ihren Browser nicht.</strong> Keine
@@ -40,8 +43,6 @@ export default function BetroffenheitSeite() {
 					anwenden.
 				</p>
 			</noscript>
-
-			<Selbstcheck telefon={site.telefon.anzeige} telefonE164={site.telefon.e164} />
 
 			<h2>Nach welchen Regeln eingestuft wird</h2>
 			<p>

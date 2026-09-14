@@ -438,7 +438,7 @@ export function Selbstcheck({ telefon, telefonE164 }: { telefon: string; telefon
 							href={`tel:${telefonE164 || "+436506633004"}`}
 							data-umami-event="telefon"
 							aria-label={`Ergebnis besprechen, Telefon ${telefon || "+43 650 66 33 004"}`}
-							className="inline-block bg-signal px-5 py-3 font-medium text-papier no-underline hover:bg-signal-tief"
+							className="inline-block bg-signal px-5 py-3 font-medium !text-papier !no-underline hover:bg-signal-tief"
 						>
 							<span>Ergebnis besprechen</span>
 							<span className="ml-2 whitespace-nowrap">{telefon || "+43 650 66 33 004"}</span>
