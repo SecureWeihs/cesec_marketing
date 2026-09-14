@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 	title: "Sascha Weihs, Informationssicherheitsbeauftragter",
 	description:
 		"Werdegang, Zertifizierungen und Arbeitsweise: Informationssicherheitsbeauftragter mit Erfahrung aus Bank und OeNB-Prüfung, von der CIS für ISO 27001 berufen.",
+	alternates: { canonical: "/about" },
 	openGraph: { images: [{ url: "/og/about.png", width: 1200, height: 630 }] },
 };
 

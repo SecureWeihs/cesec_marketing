@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 	title: "Datenschutzerklärung für die Website cesec.at",
 	description:
 		"Welche Daten diese Website verarbeitet, auf welcher Rechtsgrundlage, wo sie liegen und welche Rechte Sie haben. Ohne Cookies und ohne Einwilligungsbanner.",
+	alternates: { canonical: "/datenschutz" },
 	openGraph: { images: [{ url: "/og/standard.png", width: 1200, height: 630 }] },
 };
 

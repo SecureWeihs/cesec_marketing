@@ -5,6 +5,7 @@
  *
  *   Kriterium  7  Sitemap und robots.txt erreichbar und korrekt
  *   Kriterium  8  Titel 50–60 Zeichen, Beschreibung 140–158, beides eindeutig
+ *   Abschnitt 9.1  kanonischer Verweis je Seite, absolut auf den kanonischen Host
  *   Kriterium 10  keine Preis-, Kosten- oder Tagsatzangabe, kein Eurobetrag
  *                 (Ausnahme: gesetzliche Schwellen im Selbstcheck, siehe W1)
  *   Kriterium 12  gerendertes Impressum gleich den Stammdaten
@@ -83,6 +84,17 @@ for (const pfad of pfade) {
 	titel.set(t, pfad);
 	beschreibungen.set(d, pfad);
 
+	// Abschnitt 9.1: „Alle kanonischen URLs absolut auf diesen Host.“ Ohne
+	// diesen Verweis entscheidet die Suchmaschine selbst, welcher Hostname
+	// zählt — bei zwei erreichbaren Hosts ist das ein Glücksspiel.
+	const kanonisch = /<link rel="canonical" href="([^"]*)"/.exec(html)?.[1];
+	if (!kanonisch) {
+		melde(pfad, "kanonischer Verweis fehlt");
+	} else {
+		const erwartet = `${KANONISCH}${pfad === "/" ? "" : pfad}`;
+		if (kanonisch !== erwartet) melde(pfad, `kanonischer Verweis zeigt auf „${kanonisch}“, erwartet „${erwartet}“`);
+	}
+
 	const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
 	if (h1 !== 1) melde(pfad, `${h1} h1-Überschriften, erwartet genau eine`);
 
@@ -139,4 +151,4 @@ if (fehler.length > 0) {
 	for (const f of fehler) console.error(`  ✗ ${f}`);
 	process.exit(1);
 }
-console.log(`Abnahmeprüfung gegen ${basis} bestanden: ${pfade.length} Seiten aus der Sitemap, Kriterien 7, 8, 10, 12, 15, 16 sowie h1, strukturierte Daten und FAQ.`);
+console.log(`Abnahmeprüfung gegen ${basis} bestanden: ${pfade.length} Seiten aus der Sitemap, Kriterien 7, 8, 10, 12, 15, 16 sowie kanonische Verweise, h1, strukturierte Daten und FAQ.`);

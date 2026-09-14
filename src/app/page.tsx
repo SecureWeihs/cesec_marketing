@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 	title: { absolute: "Externer Informationssicherheitsbeauftragter | Cesec" },
 	description:
 		"Externer Informationssicherheitsbeauftragter für Unternehmen, die NISG 2026 oder ISO 27001 erfüllen müssen. Von der CIS berufen, Prüfungserfahrung mit OeNB.",
+	alternates: { canonical: "/" },
 };
 
 /*

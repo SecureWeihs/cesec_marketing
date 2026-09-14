@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 	title: "ISO 27001 Beratung: ISMS-Aufbau bis zum Zertifikat",
 	description:
 		"Reifegradanalyse, Dokumentation, interne Audits und Voraudit bis zur Begleitung durch Stufe 1 und Stufe 2 — ISO-27001-Beratung von einem berufenen Auditor.",
+	alternates: { canonical: "/iso-27001" },
 	openGraph: { images: [{ url: "/og/leistung.png", width: 1200, height: 630 }] },
 };
 

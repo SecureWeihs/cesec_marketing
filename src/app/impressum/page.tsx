@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 	title: "Impressum und Offenlegung nach ECG und MedienG",
 	description:
 		"Offenlegung nach § 5 ECG und § 25 Mediengesetz: Firmenwortlaut, Inhaber, Anschrift, Firmenbuch, UID, Gewerbe und Kammerzugehörigkeit der Cesec e. U.",
+	alternates: { canonical: "/impressum" },
 	robots: { index: true, follow: true },
 	openGraph: { images: [{ url: "/og/standard.png", width: 1200, height: 630 }] },
 };

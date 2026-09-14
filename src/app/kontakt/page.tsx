@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 	title: "Kontakt: Erstgespräch zu NISG 2026 und ISO 27001",
 	description:
 		"Telefon, E-Mail und Postanschrift der Cesec e. U. Rückmeldung innerhalb eines Werktags. Kein Kontaktformular — Sie erreichen mich direkt per Telefon.",
+	alternates: { canonical: "/kontakt" },
 	openGraph: { images: [{ url: "/og/standard.png", width: 1200, height: 630 }] },
 };
 
