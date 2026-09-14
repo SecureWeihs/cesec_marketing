@@ -70,28 +70,65 @@ weist darauf hin, dass ein CAA-Eintrag ohne Let's Encrypt die Ausstellung
 blockiert. Wenn später ein Zertifikat nicht erneuert wird, ist der CAA-Eintrag
 die erste Stelle zum Nachsehen.
 
-### Sobald der Postfachanbieter feststeht
+### E-Mail, bereits gesetzt
+
+| Typ | Name | Wert | Stand |
+|---|---|---|---|
+| MX | `cesec.at` | `10 mx1.startmail.com`, `20 mx2.startmail.com` | gesetzt |
+| TXT | `cesec.at` | `v=spf1 … ~all` | gesetzt; `~all` bewusst, weil alle Wege ins eigene Postfach laufen |
+| TXT | `startmail1._domainkey` | laut Anbieter | gesetzt |
+| TXT | `_dmarc` | `v=DMARC1;p=reject;pct=100;rua=…;ruf=…;ri=86400;fo=1;` | gesetzt |
+
+### E-Mail, noch zu setzen: MTA-STS und TLS-RPT
+
+Beide sichern die **Transportverschlüsselung eingehender Post**. SPF, DKIM und
+DMARC prüfen nur, ob eine Mail echt ist — keiner von ihnen verhindert, dass ein
+Angreifer im Übertragungsweg das STARTTLS-Angebot streicht und die Zustellung
+dadurch im Klartext läuft. Hintergrund und Begründung stehen im Kopf von
+`src/lib/mta-sts.ts`.
+
+Erst in Vercel, dann im DNS:
+
+1. **Settings → Domains → Add Domain:** `mta-sts.cesec.at` hinzufügen. Der Host
+   braucht ein gültiges Zertifikat, denn genau dieses Zertifikat ist der
+   Vertrauensanker der Richtlinie. Keine Weiterleitung einrichten — die Website
+   beantwortet diesen Host selbst.
+2. Vercel zeigt das CNAME-Ziel in der Domain-Karte an.
 
 | Typ | Name | Wert | Zweck |
 |---|---|---|---|
-| MX | `cesec.at` | `<laut Anbieter>` | E-Mail-Empfang |
-| TXT | `cesec.at` | `v=spf1 include:<Anbieter> -all` | SPF mit Hardfail |
-| TXT | `<selektor>._domainkey` | `<laut Anbieter>` | DKIM, für jedes versendende System |
-| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:sw@cesec.at; adkim=s; aspf=s` | DMARC, Start mit `p=none` |
-| TXT | `_mta-sts` | `v=STSv1; id=<Datum, z. B. 20261001>` | MTA-STS |
-| CNAME | `mta-sts` | `<Ziel aus der Domain-Karte>` | Host für die MTA-STS-Richtlinie |
-| TXT | `_smtp._tls` | `v=TLSRPTv1; rua=mailto:sw@cesec.at` | TLS-Berichte |
+| CNAME | `mta-sts` | **Ziel aus der Domain-Karte des Projekts** | Host der Richtliniendatei |
+| TXT | `_mta-sts` | `v=STSv1; id=20260914a` | kündigt die Richtlinie an |
+| TXT | `_smtp._tls` | `v=TLSRPTv1; rua=mailto:report@cesec.at` | Empfänger der TLS-Berichte |
 
-Dazu:
+Danach prüfen: `npm run pruefe:mail`. Das Skript vergleicht MX-Einträge,
+TXT-Einträge und die ausgelieferte Richtlinie miteinander und schlägt an, wenn
+etwas auseinanderläuft.
 
-- **DNSSEC** beim Registrar einschalten.
+Zum Vorgehen:
+
+- Die Richtlinie startet im Modus **`testing`**: Verstöße werden gemeldet, die
+  Zustellung läuft weiter. Im Modus `enforce` würde eine fehlerhafte Richtlinie
+  eingehende Post blockieren, **ohne** dass wir eine Fehlermeldung bekommen.
+  Deshalb erst einige Wochen TLS-RPT-Berichte auswerten, dann in
+  `src/lib/mta-sts.ts` auf `enforce` stellen, `KENNUNG` erhöhen und den
+  TXT-Eintrag `_mta-sts` auf den neuen Wert ändern.
+- Die `id` im TXT-Eintrag ist der Änderungsstempel. Ändert sich die Richtlinie,
+  ohne dass die `id` sich ändert, holen absendende Server die neue Fassung erst
+  nach Ablauf von `max_age` (eine Woche).
+- Die TLS-RPT-Berichte kommen als JSON, üblicherweise täglich und komprimiert.
+
+Dazu allgemein:
+
+- **DNSSEC** beim Registrar einschalten. Solange die Zone unsigniert ist, ist
+  MTA-STS der wirksamere Hebel — es stützt sich auf das HTTPS-Zertifikat statt
+  auf das DNS. Das DNSSEC-gestützte Gegenstück (DANE/TLSA) kommt bis dahin
+  nicht in Frage.
 - **Keine Wildcard-Einträge** (`*.cesec.at`), keine ungenutzten Subdomains — sie
   sind ein Einfallstor für Subdomain-Übernahmen.
-- **DMARC** nach vier Wochen Auswertung auf `p=quarantine`, danach auf
-  `p=reject`.
-- **MTA-STS** braucht zusätzlich eine Richtliniendatei unter
-  `https://mta-sts.cesec.at/.well-known/mta-sts.txt` mit den MX-Hosts des
-  Postfachanbieters. Sie wird ergänzt, sobald der Anbieter feststeht.
+- **secure-way.at:** Den alten DNS-Eintrag erst löschen, wenn entschieden ist,
+  ob die Domain per 301 auf cesec.at umgeleitet wird (empfohlen, solange die
+  Domain gehalten wird).
 - **secure-way.at:** Den alten DNS-Eintrag erst löschen, wenn entschieden ist,
   ob die Domain per 301 auf cesec.at umgeleitet wird (empfohlen, solange die
   Domain gehalten wird).
@@ -121,6 +158,8 @@ Einmalig von Hand (Screenshots in den Abnahme-Pull-Request):
 - [ ] Rich-Results-Test und Schema-Markup-Validator ohne Fehler
 - [ ] Tastaturdurchlauf aller Seitentypen
 - [ ] Search Console und Bing per DNS verifizieren, Sitemap einreichen
+- [ ] `npm run pruefe:mail` grün — MX, MTA-STS, TLS-RPT, SPF und DMARC stimmen
+      miteinander überein
 
 Später:
 

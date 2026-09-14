@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import hashLandkarte from "@/generated/csp-hashes.json";
+import { MTA_STS_HOST, MTA_STS_PFAD, richtlinie as mtaStsRichtlinie } from "@/lib/mta-sts";
 
 /**
  * Content-Security-Policy, seitenweise.
@@ -55,8 +56,42 @@ function richtlinie(pfad: string, entwicklung: boolean): string {
 	].join("; ");
 }
 
+/**
+ * mta-sts.cesec.at trägt ausschließlich die MTA-STS-Richtlinie (RFC 8461).
+ *
+ * Alles andere wird auf den kanonischen Host umgeleitet: Wäre die Website unter
+ * einem zweiten Namen erreichbar, stünde sie doppelt im Index — derselbe
+ * Fehler, der schon einmal die kanonischen Verweise gekostet hat.
+ *
+ * Die Richtliniendatei selbst darf dabei niemals weitergeleitet werden:
+ * RFC 8461, Abschnitt 3.3 verbietet absendenden Servern ausdrücklich, einer
+ * Weiterleitung zu folgen. Sie wird deshalb hier direkt beantwortet, mit
+ * text/plain und ohne jede Abhängigkeit vom Seitenaufbau.
+ */
+function mtaSts(request: NextRequest): NextResponse {
+	if (request.nextUrl.pathname === MTA_STS_PFAD) {
+		return new NextResponse(mtaStsRichtlinie(), {
+			status: 200,
+			headers: {
+				"content-type": "text/plain; charset=utf-8",
+				"cache-control": "public, max-age=3600",
+				"content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'",
+				"x-robots-tag": "noindex",
+			},
+		});
+	}
+	const ziel = new URL(`${request.nextUrl.pathname}${request.nextUrl.search}`, "https://cesec.at");
+	return NextResponse.redirect(ziel, 308);
+}
+
 export function proxy(request: NextRequest): NextResponse {
 	const entwicklung = process.env.NODE_ENV === "development";
+
+	// Maßgeblich ist der Host-Header, nicht nextUrl: hinter dem CDN trägt nur er
+	// den vom Besucher tatsächlich aufgerufenen Namen.
+	const host = (request.headers.get("host") ?? "").toLowerCase().split(":")[0] ?? "";
+	if (host === MTA_STS_HOST) return mtaSts(request);
+
 	const antwort = NextResponse.next();
 	antwort.headers.set(
 		"content-security-policy",

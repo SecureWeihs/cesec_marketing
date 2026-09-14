@@ -18,6 +18,7 @@
 		"pruefe:bilder": "node scripts/pruefe-bilder.mjs",
 		"nap": "node scripts/nap.mjs",
 		"pruefe:a11y": "node scripts/pruefe-barrierefreiheit.mjs",
+		"pruefe:mail": "node scripts/pruefe-mail.mjs",
 		"test": "node --test \"tests/**/*.test.ts\""
 	},
 	"dependencies": {
