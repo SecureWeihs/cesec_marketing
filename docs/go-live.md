@@ -29,30 +29,58 @@ Wie bei der früheren Website: Vercel holt den Code aus GitHub.
 
 ## 2. Domains in Vercel
 
-1. `cesec.at` als Produktionsdomain hinzufügen.
-2. `www.cesec.at` hinzufügen und auf `cesec.at` umleiten lassen, **dauerhaft (308
-   oder 301)**. Kanonischer Host ist `cesec.at` ohne www.
-3. Vercel zeigt dann die DNS-Werte an, die gesetzt werden müssen.
+Kanonischer Host ist **`cesec.at` ohne www**. Vercel empfiehlt zwar `www` als
+primäre Domain, weil das CDN dann mehr Steuerung über eingehenden Verkehr hat;
+die Website ist aber durchgehend auf die Apex-Domain gebaut — kanonische URLs,
+Sitemap, strukturierte Daten und die automatische Produktionsprüfung. Ein
+Wechsel wäre eine Änderung an allen Seiten, kein DNS-Handgriff.
+
+1. **Settings → Domains → Add Domain:** `cesec.at` hinzufügen. Vercel schlägt
+   automatisch `www.cesec.at` dazu vor — annehmen.
+2. Vercel zeigt danach in der Domain-Karte die **konkreten Werte** an: eine
+   IP für den A-Record der Apex-Domain und ein CNAME-Ziel für `www`. Beide sind
+   projektspezifisch.
+3. **Weiterleitung setzen:** Bei `www.cesec.at` auf **Edit** und unter
+   *Redirect to* `cesec.at` wählen. Damit landet jeder Besucher dauerhaft auf
+   der Apex-Domain.
 
 ## 3. DNS-Einträge
 
-Beim Registrar bzw. DNS-Anbieter von `cesec.at`. Die Werte für die Website kommen
-aus Vercel (Schritt 2), die Werte für E-Mail vom Postfachanbieter.
+Beim Registrar bzw. DNS-Anbieter von `cesec.at`. Die Werte für die Website
+stehen in der Domain-Karte des Vercel-Projekts, die Werte für E-Mail beim
+Postfachanbieter.
+
+### Jetzt nötig
 
 | Typ | Name | Wert | Zweck |
 |---|---|---|---|
-| A oder ALIAS | `cesec.at` | `<laut Vercel>` | Website |
-| CNAME | `www` | `<laut Vercel>` | Weiterleitung auf cesec.at |
-| CAA | `cesec.at` | `0 issue "<Zertifizierungsstelle laut Vercel>"` | nur diese Stelle darf Zertifikate ausstellen |
+| A | `cesec.at` | **Wert aus der Domain-Karte des Projekts** | Website |
+| CNAME | `www` | **Ziel aus der Domain-Karte des Projekts** | Weiterleitung auf cesec.at |
+| CAA | `cesec.at` | `0 issue "letsencrypt.org"` | nur diese Stelle darf Zertifikate ausstellen |
 | CAA | `cesec.at` | `0 iodef "mailto:sw@cesec.at"` | Meldung bei Verstößen |
-| TXT | `cesec.at` | `v=spf1 include:<Postfachanbieter> -all` | SPF mit Hardfail |
-| TXT | `<selektor>._domainkey` | `<laut Postfachanbieter>` | DKIM, für jedes versendende System |
+| TXT | `cesec.at` | `google-site-verification=<Wert>` | Search Console |
+| TXT oder CNAME | `<laut Bing>` | `<Wert>` | Bing Webmaster Tools |
+
+Vercel nennt `76.76.21.21` nur als allgemeine Adresse und schreibt dazu:
+„Always use the value shown in your project's domain card." Neuere Projekte
+bekommen eigene Adressen. Also immer den angezeigten Wert nehmen.
+
+Zum CAA-Eintrag: Vercel stellt die Zertifikate über **Let's Encrypt** aus und
+weist darauf hin, dass ein CAA-Eintrag ohne Let's Encrypt die Ausstellung
+blockiert. Wenn später ein Zertifikat nicht erneuert wird, ist der CAA-Eintrag
+die erste Stelle zum Nachsehen.
+
+### Sobald der Postfachanbieter feststeht
+
+| Typ | Name | Wert | Zweck |
+|---|---|---|---|
+| MX | `cesec.at` | `<laut Anbieter>` | E-Mail-Empfang |
+| TXT | `cesec.at` | `v=spf1 include:<Anbieter> -all` | SPF mit Hardfail |
+| TXT | `<selektor>._domainkey` | `<laut Anbieter>` | DKIM, für jedes versendende System |
 | TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:sw@cesec.at; adkim=s; aspf=s` | DMARC, Start mit `p=none` |
 | TXT | `_mta-sts` | `v=STSv1; id=<Datum, z. B. 20261001>` | MTA-STS |
-| CNAME | `mta-sts` | `<laut Vercel>` | Host für die MTA-STS-Richtlinie |
+| CNAME | `mta-sts` | `<Ziel aus der Domain-Karte>` | Host für die MTA-STS-Richtlinie |
 | TXT | `_smtp._tls` | `v=TLSRPTv1; rua=mailto:sw@cesec.at` | TLS-Berichte |
-| TXT | `cesec.at` | `google-site-verification=<Wert>` | Search Console |
-| CNAME oder TXT | `<laut Bing>` | `<Wert>` | Bing Webmaster Tools |
 
 Dazu:
 
@@ -72,9 +100,9 @@ Dazu:
 
 - [ ] Rechtstexte (Impressum, Datenschutz, Barrierefreiheit) freigegeben und über
       WKO oder Anwalt geprüft
-- [ ] GISA-Zahl in `content/impressum.yaml` eingetragen
+- [x] GISA-Zahl in `content/impressum.yaml` eingetragen
 - [ ] Anbieter des Postfachs in der Datenschutzerklärung ergänzt
-- [ ] Inhalte über den Inhaber freigegeben (Startseite, About, Referenzen)
+- [x] Inhalte über den Inhaber freigegeben (Startseite, About, Referenzen)
 - [ ] Offene Punkte geklärt oder bewusst offen gelassen
 
 ## 5. Nach dem ersten Produktions-Deployment
